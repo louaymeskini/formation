@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Liste des associations
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+          <tr>
+            <th>Logo Association</th>
+            <th>Nom Association</th>
+            <th>Ville</th>
+            <th>Adresse</th>
+            <th>Code Postale</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let association of listeAssociation">
+            <td><img src="{{api+association.imageAssociation}}" width="50" height="50"></td>
+            <td>{{association.nom}}</td>
+            <td>{{association.ville}}</td>
+            <td>{{association.adresse}}</td>
+            <td>{{association.codePostale}}</td>
+            <td>{{association.tel}}</td>
+            <td>{{association.email}}</td>
+            <td><i class="fa fa-edit" style="cursor: pointer;"></i></td>
+            <td><i class="fa fa-remove"
+                   style="cursor: pointer;"
+                   (click)="dangerModal.show()"></i></td>
+
+            <div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-danger" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Supprimer Association</h4>
+                    <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Voulez-vous vraiment supprimer l'association <strong>{{association.nom | uppercase}}</strong></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">Annuler</button>
+                    <button type="button" class="btn btn-danger" (click)="supprimerAssociation(association)">Supprimer</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+          </tr>
+          </tbody>
+        </table>
+        <nav>
+<!--          <jw-pagination [items]="listeAssociation" (changePage)="onChangePage($event)"></jw-pagination>-->
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+
+<div *ngFor="let alert of alertsDeleted">
+  <alert [type]="alert.type"
+         [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+</div>

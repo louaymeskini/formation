@@ -1,0 +1,175 @@
+<div class="col-sm-12">
+
+  <div class="card">
+    <form #Form="ngForm" (ngSubmit)="ajouterAssociation(Form.value)">
+      <div class="card-header">
+        <small>Ajouter</small>
+        <strong>Association</strong>
+
+      </div>
+      <div class="card-body">
+
+        <div class="form-group">
+          <label for="imageAssociation">Logo Association</label>
+          <div>
+            <input type="file"
+                   id="imageAssociation"
+                   name="imageAssociation"
+                   [ngClass]="{error: imgError === true || (Form.value.password2 === '' && Form.submitted === true)}"
+                   (change)="handleFileInput($event.target.files)"
+                   required
+                   ngModel>
+            <small class="help-block red"
+                   *ngIf="(Form.value.imageAssociation === '' && Form.submitted === true) || imgError === true">
+              Vérifier l'image! (PNG/JPG/JPEG)</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom Association</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{error: Form.value.nom === '' && Form.submitted === true}"
+                 id="nom"
+                 placeholder="Entrer le Nom de l'association"
+                 name="nom"
+                 required
+                 ngModel>
+          <small class="help-block red"
+                 *ngIf="Form.value.nom === '' && Form.submitted === true">
+            Vérifier le nom!</small>
+        </div>
+        <div class="form-group">
+          <label for="adresse">Adresse</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{error: Form.value.adresse === '' && Form.submitted === true}"
+                 id="adresse"
+                 placeholder="Entrer l'Adresse de l'association"
+                 name="adresse"
+                 required
+                 ngModel>
+          <small class="help-block red"
+                 *ngIf="Form.value.adresse === '' && Form.submitted === true">
+            Vérifier l'adresse!</small>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-8">
+            <label for="ville">Ville</label>
+            <input type="text"
+                   class="form-control"
+                   [ngClass]="{error: Form.value.ville === '' && Form.submitted === true}"
+                   id="ville"
+                   placeholder="Entrer la Ville de l'association"
+                   name="ville"
+                   required
+                   ngModel>
+            <small class="help-block red"
+                   *ngIf="Form.value.ville === '' && Form.submitted === true">
+              Vérifier l'adresse!</small>
+          </div>
+          <div class="form-group col-sm-4">
+            <label for="postal-code">Postal Code</label>
+            <input type="number"
+                   class="form-control"
+                   [ngClass]="{error: Form.value.codePostale === '' && Form.submitted === true}"
+                   id="postal-code"
+                   placeholder="Postal Code"
+                   name="codePostale"
+                   required
+                   ngModel
+                   maxlength="4"
+                   minlength="4">
+            <small class="help-block red"
+                   *ngIf="Form.value.codePostale === '' && Form.submitted === true">
+              Vérifier le code Postale!</small>
+          </div>
+        </div><!--/.row-->
+        <div class="form-group">
+          <label for="tel">Téléphone</label>
+          <input type="number"
+                 class="form-control"
+                 [ngClass]="{error: Form.value.tel === '' && Form.submitted === true}"
+                 id="tel"
+                 placeholder="Entrer le Téléphone de l'association"
+                 name="tel"
+                 required
+                 ngModel
+                 maxlength="9"
+                 minlength="9">
+          <small class="help-block red"
+                 *ngIf="Form.value.tel === '' && Form.submitted === true">
+            Vérifier le Téléphone!</small>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Association {{log(Form)}}</label>
+          <input type="email"
+                 class="form-control"
+                 [ngClass]="{error: Form.value.email === '' && Form.submitted === true}"
+                 id="email"
+                 placeholder="Entrer l'Email de l'association"
+                 name="email"
+                 required
+                 email
+                 ngModel>
+          <small class="help-block red"
+                 *ngIf="Form.value.email === '' && Form.submitted === true">
+            Vérifier l'Email!</small>
+        </div>
+        <div class="form-group">
+          <label for="username">Username Association</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{error: Form.value.username === '' && Form.submitted === true}"
+                 id="username"
+                 placeholder="Entrer Username de l'association"
+                 name="username"
+                 required
+                 ngModel>
+          <small class="help-block red"
+                 *ngIf="Form.value.username === '' && Form.submitted === true">
+            Vérifier le username!</small>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot De Passe Association</label>
+          <input type="password"
+                 class="form-control"
+                 [ngClass]="{error: passwordMatch === false || (Form.value.password === '' && Form.submitted === true)}"
+                 id="password"
+                 placeholder="Entrer password de l'association"
+                 name="password"
+                 required
+                 ngModel>
+          <small class="help-block red"
+                 *ngIf="passwordMatch === false || (Form.value.password === '' && Form.submitted === true)">
+            Vous devez confirmer le mot de passe!</small>
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirmer Mot De Passe Association</label>
+          <input type="password"
+                 class="form-control"
+                 [ngClass]="{error: passwordMatch === false || (Form.value.password2 === '' && Form.submitted === true)}"
+                 id="password2"
+                 placeholder="Confirmer password de l'association"
+                 ngModel
+                 name="password2"
+                 required
+                 #password2>
+          <small class="help-block red"
+                 *ngIf="passwordMatch === false  || (Form.value.password2 === '' && Form.submitted === true)">
+            Vous devez confirmer le mot de passe!</small>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button type="submit"
+                size="sm"
+                class="btn btn-sm btn-primary"
+        [disabled]="!Form.valid || imgError">
+          <i class="fa fa-dot-circle-o"></i> Créer Association
+        </button>
+        <button type="reset" size="sm" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+      </div>
+    </form>
+  </div>
+
+</div><!--/.col-->
