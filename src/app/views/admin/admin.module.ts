@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {AdminRoutingModule} from './admin-routing';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdminComponent} from './admin.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptorService} from '../services/token-interceptor.service';
@@ -26,7 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
     AdminRoutingModule,
     FormsModule,
     ModalModule,
-    AlertModule
+    AlertModule,
+    ReactiveFormsModule
   ],
   providers: [AssociationService,
     {
