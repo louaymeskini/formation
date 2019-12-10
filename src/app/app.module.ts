@@ -44,7 +44,7 @@ import {AuthRoutingModule} from './views/auth/auth-routing.module';
 import {AuthModule} from './views/auth/auth.module';
 import {AuthService} from './views/services/auth.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {AssociationService} from './views/services/association.service';
+import {AssociationService} from './service-layer/store/association/services/association.service';
 import {TokenInterceptorService} from './views/services/token-interceptor.service';
 import {AdminModule} from './views/admin/admin.module';
 

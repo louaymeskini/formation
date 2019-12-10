@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {environment} from '../../../environments/environment';
-import {AssociationModel} from '../models/association.model';
+import {environment} from '../../../../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {AdminModel} from '../models/admin.model';
+import {AdminModel} from '../../../../core/models/admin.model';
 
 @Injectable({
   providedIn : 'root'

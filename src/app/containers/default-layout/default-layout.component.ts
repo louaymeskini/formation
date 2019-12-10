@@ -26,9 +26,9 @@ export class DefaultLayoutComponent {
   }
 
   navToDisplay() {
-    if (this.authService.getType() === 'admin') {
+    if (this.authService.getType() === 'admin' || localStorage.getItem('idAdmin')) {
       return this.adminNav;
-    } else if (this.authService.getType() === 'association') {
+    } else if (this.authService.getType() === 'association' || localStorage.getItem('idAssociation')) {
       return this.associationNav;
     }
   }

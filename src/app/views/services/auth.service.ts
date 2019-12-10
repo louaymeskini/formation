@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {catchError, tap} from 'rxjs/operators';
-import {UserModel} from '../models/user.model';
+import {UserModel} from '../../core/models/user.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, throwError} from 'rxjs';
-import {AssociationModel} from '../models/association.model';
+import {AssociationModel} from '../../core/models/association.model';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 // import {User} from '../models/auth.model';
@@ -42,9 +42,9 @@ export class AuthService {
                 this.role = 'admin';
                 this.logged = true;
               } else if (resData.data.user.type === 'association') {
-                this.role = 'association';
                 localStorage.setItem('token', JSON.stringify(resData.data.token));
                 localStorage.setItem('idAassociation', JSON.stringify(resData.data.user._id));
+                this.role = 'association';
                 this.logged = true;
               }
             } else {

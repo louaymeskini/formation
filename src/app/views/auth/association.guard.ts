@@ -7,7 +7,6 @@ import {
 } from '@angular/router';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {map, tap, take} from 'rxjs/operators';
 import {AuthService} from '../services/auth.service';
 
 
@@ -24,7 +23,7 @@ export class AssociationGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    if (localStorage.getItem('idAssociation')) {
+    if (localStorage.getItem('idAssociation') || this.authService.role === 'association') {
       return true;
     }
     return this.router.createUrlTree(['/login']);

@@ -57,16 +57,60 @@
           <label for="password">Votre Ancien Mot De Passe *</label>
           <input type="password"
                  class="form-control"
+                 [ngClass]="{error: adminForm.get('password').invalid &&
+                 submitted === true}"
                  id="password"
                  placeholder="Entrer votre ancien mot de passe"
-                 formControlName="password"
-                 [ngClass]="{error: adminForm.get('password').invalid &&
-                 submitted === true}">
+                 formControlName="password">
           <small class="help-block red"
                  *ngIf="adminForm.get('password').invalid &&
                  submitted === true">
             Vous devez vérifier votre password!</small>
         </div>
+        <div class="row">
+          <div class="col-sm-1">
+            <label class="switch switch-pill switch-primary">
+              <input (click)="canUpdatePass()" [checked]="canUpdate" type="checkbox" class="switch-input" checked>
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+          <div class="col-sm-4">
+          <p>Voulez Vous changez votre mot de passe ?</p>
+          </div>
+        </div>
+<div *ngIf="canUpdate==true" class="">
+  <div class="form-group">
+    <label for="newPassword">Votre Nouveau Mot De Passe *</label>
+    <input type="password"
+           class="form-control"
+           [ngClass]="{error: adminForm.get('newPassword').invalid &&
+                 submitted === true && canUpdate === true}"
+           id="newPassword"
+           placeholder="Entrer votre nouveau mot de passe"
+           formControlName="newPassword"
+    >
+    <small class="help-block red"
+           *ngIf="adminForm.get('newPassword').invalid &&
+                 submitted === true && canUpdate === true">
+      Vous devez vérifier votre Nouveau Mot de passe!</small>
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Votre Ancien Mot De Passe *</label>
+    <input type="password"
+           class="form-control"
+           [ngClass]="{error: adminForm.get('confirmPassword').invalid &&
+                 submitted === true && canUpdate === true}"
+           id="confirmPassword"
+           placeholder="Confirmez votre nouveau mot de passe"
+           formControlName="confirmPassword"
+    >
+    <small class="help-block red"
+           *ngIf="adminForm.get('confirmPassword').invalid &&
+                 submitted === true && canUpdate === true">
+      Vous devez confirmer votre Nouveau Mot de Passe!</small>
+  </div>
+
+</div>
       </div>
       <div class="card-footer">
         <button type="submit"

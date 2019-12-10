@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgForm, NgModel} from '@angular/forms';
-import {AssociationService} from '../../services/association.service';
-import {AssociationModel} from '../../models/association.model';
+import {AssociationService} from '../../../service-layer/store/association/services/association.service';
+import {AssociationModel} from '../../../core/models/association.model';
 
 @Component({
   selector: 'app-ajouter-association',

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpEventType, HttpHeaders, HttpParams} from '@angular/common/http';
-import {catchError, map, tap} from 'rxjs/operators';
-import {AssociationModel} from '../models/association.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, map} from 'rxjs/operators';
+import {AssociationModel} from '../../../../core/models/association.model';
 import {throwError} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
 
 @Injectable({
