@@ -3,7 +3,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {AssociationService} from '../../../service-layer/store/association/services/association.service';
 import {AdminService} from '../../../service-layer/store/admin/services/admin.service';
 import {AdminModel} from '../../../core/models/admin.model';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +16,15 @@ export class ProfileComponent implements OnInit {
   adminForm: FormGroup;
   submitted: boolean;
   adminInfo: AdminModel;
-  newAdmin: AdminModel = {email: '', nom: '', password: '', prenom: '', username: ''};
+  newAdmin: AdminModel = {email: '',
+    nom: '',
+    password: '',
+    newPassword: '',
+    confirmPassword: '',
+    prenom: '',
+    username: ''};
   canUpdate: boolean = false;
+  errorMsg: string = '';
   passwordMatch: boolean;
 
   canUpdatePass() {
@@ -31,7 +40,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService,
+              private router: Router,
+              private spinnerService: NgxSpinnerService) {
     this.validate();
   }
 
@@ -71,7 +82,7 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log('form', this.adminForm);
+
     const nom = this.adminForm.value.nom;
     const prenom = this.adminForm.value.prenom;
     const email = this.adminForm.value.email;
@@ -82,24 +93,47 @@ export class ProfileComponent implements OnInit {
     this.adminForm.value.username === null ? this.newAdmin.username = this.adminInfo.username : this.newAdmin.username = username;
     this.adminForm.value.email === null ? this.newAdmin.email = this.adminInfo.email : this.newAdmin.email = email;
     if (this.adminForm.valid) {
+      this.spinnerService.show();
       if (this.canUpdate === false) {
         this.newAdmin.password = password;
         console.log('1', this.newAdmin);
-        this.adminService.updateAdmin(this.newAdmin);
-        // this.adminService.updateAdmin()
+        this.adminService.updateAdmin(this.newAdmin).subscribe((response: any) => {
+          this.spinnerService.hide();
+          this.errorMsg = response.msg;
+          if (response.state !== 'not ok') {
+            this.router.navigate(['/admin']);
+            this.spinnerService.hide();
+          }
+        }, error => {
+          this.spinnerService.hide();
+          return throwError(error);
+        });
       } else {
         if (this.adminForm.value.newPassword === this.adminForm.value.confirmPassword) {
           this.passwordMatch = true;
-          this.newAdmin.password = this.adminForm.value.newPassword;
+          this.newAdmin.password = password;
+          this.newAdmin.newPassword = this.adminForm.value.newPassword;
+          this.newAdmin.confirmPassword = this.adminForm.value.confirmPassword;
           console.log('2', this.newAdmin);
-          this.adminService.updateAdmin(this.newAdmin);
+          this.adminService.updateAdmin(this.newAdmin).subscribe((response: any) => {
+            this.spinnerService.hide();
+            this.errorMsg = response.msg;
+            if (response.state !== 'not ok') {
+              this.router.navigate(['/admin']);
+            }
+          }, error => {
+            return throwError(error);
+          });
         } else {
-          this.passwordMatch = false;
+          this.spinnerService.hide();
+          this.errorMsg = 'password mismatch';
         }
       }
     } else {
-      console.log('invalid formulaire');
+      this.spinnerService.hide();
+      this.errorMsg = 'invalid formulaire';
     }
+    // this.errorMsg = this.adminService.errorMsg;
   }
 
 }

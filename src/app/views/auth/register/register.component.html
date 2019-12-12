@@ -2,89 +2,208 @@
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-10 mx-auto">
+
           <div class="card mx-4">
-            <div class="card-body p-4">
-              <form>
+            <form class="form-horizontal" [formGroup]="benevoleForm" (submit)="register()">
+              <div class="card-body p-4">
                 <h1>Inscription</h1>
                 <p class="text-muted">Créer votre compte</p>
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Votre Nom" autocomplete="nom" required>
-              </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-user"></i></span>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input class="form-control"
+                             [ngClass]="{error: ((nom.dirty || nom.touched) && nom.invalid && nom.errors.required)}"
+                             size="16" type="text"
+                             placeholder="Votre Nom"
+                             formControlName="nom"
+                             required>
+                    </div>
+                    <small class="help-block red"
+                           *ngIf="(nom.dirty || nom.touched) && nom.invalid && nom.errors.required">
+                      Vérifier votre nom!</small>
                   </div>
-                  <input type="text" class="form-control" placeholder="Votre Prenom" autocomplete="prenom" required>
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-user"></i></span>
+                  <div class="form-group col-sm-6">
+                    <div class="controls">
+                      <div class="input-prepend input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-user"></i></span>
+                        </div>
+                        <input class="form-control"
+                               [ngClass]="{error: ((prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors.required)}"
+                               size="16"
+                               type="text"
+                               placeholder="Votre Prenom"
+                               formControlName="prenom"
+                               required>
+                      </div>
+                      <small class="help-block red"
+                             *ngIf="(prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors.required">
+                        Vérifier votre prenom!</small>
+                    </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Votre Nom" autocomplete="nom" required>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="inline-radios">Genre</label>
+                  <div class="col-md-9 col-form-label">
+                    <div class="col-md-4 form-check form-check-inline mr-1" id="inline-radios">
+                      <input class="form-check-input" type="radio" name="sexe" formControlName="sexe" id="homme"
+                             value="homme">
+                      <label class="form-check-label" for="homme">Homme</label>
+                    </div>
+                    <div class="col-md-4 form-check form-check-inline mr-1">
+                      <input class="form-check-input" type="radio" name="sexe" formControlName="sexe" id="femme"
+                             value="femme">
+                      <label class="form-check-label" for="femme">Femme</label>
+                    </div>
+                  </div>
                 </div>
                 <div class="row">
-                  <div class="input-group-prepend">
-                <label class="col-md-2 col-form-label" >Genre</label>
+                  <div class="form-group col-sm-6">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-map"></i></span>
+                      </div>
+                      <input class="form-control"
+                             [ngClass]="{error: ((ville.dirty || ville.touched) && ville.invalid && ville.errors.required)}"
+                             size="16"
+                             type="text"
+                             placeholder="Votre Ville"
+                             formControlName="ville"
+                             required>
+                    </div>
+                    <small class="help-block red"
+                           *ngIf="(ville.dirty || ville.touched) && ville.invalid && ville.errors.required">
+                      Vérifier votre ville!</small>
                   </div>
-                  <div class="col-md-10 col-form-label">
-                <div class="input-group mb-3 form-check">
-                  <input class="form-check-input" type="radio" name="genre" id="homme" value="homme" checked>
-                  <label class="form-check-label" for="homme">
-                    Homme
-                  </label>
-                </div>
-                <div class="input-group mb-3 form-check">
-                  <input class="form-check-input" type="radio" name="genre" id="femme" value="femme">
-                  <label class="form-check-label" for="femme">
-                    Femme
-                  </label>
-                </div>
+                  <div class="form-group col-sm-6">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input class="form-control"
+                             [ngClass]="{error: ((codePostale.dirty || codePostale.touched) && codePostale.invalid && codePostale.errors)}"
+                             size="16"
+                             type="number"
+                             placeholder="Code Postale"
+                             formControlName="codePostale"
+                             required>
+                    </div>
+                    <small class="help-block red"
+                           *ngIf="(codePostale.dirty || codePostale.touched) && codePostale.invalid && codePostale.errors">
+                      Vérifier votre code Postale!</small>
                   </div>
                 </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-user"></i></span>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-directions"></i></span>
+                      </div>
+                      <input class="form-control"
+                             [ngClass]="{error: ((adresse.dirty || adresse.touched) && adresse.invalid && adresse.errors)}"
+                             size="16"
+                             type="text"
+                             placeholder="Votre Adresse"
+                             formControlName="adresse"
+                             required>
+                    </div>
+                    <small class="help-block red"
+                           *ngIf="(adresse.dirty || adresse.touched) && adresse.invalid && adresse.errors">
+                      Vérifier votre adresse!</small>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
+                  <div class="form-group col-sm-6">
+                    <div class="controls">
+                      <div class="input-prepend input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-phone"></i></span>
+                        </div>
+                        <input class="form-control"
+                               [ngClass]="{error: ((tel.dirty || tel.touched) && tel.invalid && tel.errors)}"
+                               size="16" type="number"
+                               placeholder="Votre téléphone"
+                               formControlName="tel"
+                               required>
+                      </div>
+                      <small class="help-block red"
+                             *ngIf="(tel.dirty || tel.touched) && tel.invalid && tel.errors">
+                        Vérifier votre Téléphone!</small>
+                    </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Email" autocomplete="email" required>
                 </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                <div class="form-group">
+                  <div class="input-prepend input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input class="form-control"
+                           [ngClass]="{error: ((username.dirty || username.touched) && username.invalid && username.errors)}"
+                           size="16" type="text"
+                           placeholder="Username"
+                           formControlName="username"
+                           required>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password" autocomplete="new-password" required>
+                  <small class="help-block red"
+                         *ngIf="(username.dirty || username.touched) && username.invalid && username.errors">
+                    Vérifier votre username!</small>
                 </div>
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                <div class="form-group">
+                  <div class="input-prepend input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                    </div>
+                    <input class="form-control"
+                           [ngClass]="{error: ((email.dirty || email.touched) && email.invalid && email.errors)}"
+                           size="16" type="text"
+                           placeholder="Email"
+                           formControlName="email"
+                           required>
                   </div>
-                  <input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" required>
+                  <small class="help-block red"
+                         *ngIf="(email.dirty || email.touched) && email.invalid && email.errors">
+                    Vérifier votre email!</small>
                 </div>
-                <button type="button" class="btn btn-block btn-success">Create Account</button>
-              </form>
-            </div>
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                <div class="form-group">
+                  <div class="input-prepend input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input class="form-control"
+                           [ngClass]="{error: ((password.dirty || password.touched) && password.invalid && password.errors)}"
+                           size="16"
+                           type="password"
+                           placeholder="Password"
+                           formControlName="password"
+                           required>
+                  </div>
+                  <small class="help-block red"
+                         *ngIf="(password.dirty || password.touched) && password.invalid && password.errors">
+                    Vérifier votre password!</small>
                 </div>
-                <div class="col-6">
-                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+
+                <div *ngFor="let alert of alertsError">
+                  <alert [type]="alert.type"
+                         [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+                </div>
+
+              </div>
+              <div class="card-footer p-4">
+                <div class="row">
+                  <button [disabled]="!benevoleForm.valid" type="submit" class="btn btn-block btn-success">Create Account</button>
+
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </main>
 </div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+  <p style="color: white">Attendez SVP... </p>
+</ngx-spinner>

@@ -58,14 +58,15 @@
           <input type="password"
                  class="form-control"
                  [ngClass]="{error: adminForm.get('password').invalid &&
-                 submitted === true}"
+                 submitted === true
+                  || errorMsg !== ''}"
                  id="password"
                  placeholder="Entrer votre ancien mot de passe"
                  formControlName="password">
           <small class="help-block red"
                  *ngIf="adminForm.get('password').invalid &&
-                 submitted === true">
-            Vous devez vérifier votre password!</small>
+                 submitted === true  || errorMsg !== ''">
+            Vous devez vérifier votre password! {{errorMsg}}</small>
         </div>
         <div class="row">
           <div class="col-sm-1">
@@ -84,30 +85,34 @@
     <input type="password"
            class="form-control"
            [ngClass]="{error: adminForm.get('newPassword').invalid &&
-                 submitted === true && canUpdate === true}"
+                 submitted === true && canUpdate === true
+                 || errorMsg !== ''}"
            id="newPassword"
            placeholder="Entrer votre nouveau mot de passe"
            formControlName="newPassword"
     >
     <small class="help-block red"
            *ngIf="adminForm.get('newPassword').invalid &&
-                 submitted === true && canUpdate === true">
-      Vous devez vérifier votre Nouveau Mot de passe!</small>
+                 submitted === true && canUpdate === true
+|| errorMsg !== ''">
+      Vous devez vérifier votre Nouveau Mot de passe! {{errorMsg}}</small>
   </div>
   <div class="form-group">
     <label for="confirmPassword">Votre Ancien Mot De Passe *</label>
     <input type="password"
            class="form-control"
            [ngClass]="{error: adminForm.get('confirmPassword').invalid &&
-                 submitted === true && canUpdate === true}"
+                 submitted === true && canUpdate === true
+                 || errorMsg !== ''}"
            id="confirmPassword"
            placeholder="Confirmez votre nouveau mot de passe"
            formControlName="confirmPassword"
     >
     <small class="help-block red"
            *ngIf="adminForm.get('confirmPassword').invalid &&
-                 submitted === true && canUpdate === true">
-      Vous devez confirmer votre Nouveau Mot de Passe!</small>
+                 submitted === true && canUpdate === true
+|| errorMsg !== ''">
+      Vous devez confirmer votre Nouveau Mot de Passe! {{errorMsg}}</small>
   </div>
 
 </div>
@@ -123,3 +128,7 @@
     </form>
   </div>
 </div><!--/.col-->
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+  <p style="color: white">Attendez SVP... </p>
+</ngx-spinner>

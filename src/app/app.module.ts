@@ -47,7 +47,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AssociationService} from './service-layer/store/association/services/association.service';
 import {TokenInterceptorService} from './views/services/token-interceptor.service';
 import {AdminModule} from './views/admin/admin.module';
-
 @NgModule({
   imports: [
     BrowserModule,

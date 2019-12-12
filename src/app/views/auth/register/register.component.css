@@ -1,0 +1,17 @@
+.ng-valid,
+.ng-valid.required {
+  /*background-color: lightgreen;*/
+  border: 1px solid lightgreen
+}
+
+/*.ng-invalid:not(form) {*/
+/*  border: 1px solid lightcoral;*/
+/*}*/
+
+.error {
+  border: 1px solid lightcoral;
+}
+
+.red {
+  color: lightcoral;
+}

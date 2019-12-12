@@ -34,18 +34,22 @@ export class AuthService {
         catchError(this.handleError),
 
         tap(resData => {
-            // console.log('resData ', resData);
-            if (resData.status !== 'error') { // resData.status !== 'error'
+            console.log('service ', resData);
+            if (resData.status !== 'error') {
+              localStorage.setItem('token', JSON.stringify(resData.data.token));
+              this.logged = true;
               if (resData.data.user.type === 'admin') {
-                localStorage.setItem('token', JSON.stringify(resData.data.token));
                 localStorage.setItem('idAdmin', JSON.stringify(resData.data.user._id));
+                this.router.navigate(['/admin']);
                 this.role = 'admin';
-                this.logged = true;
               } else if (resData.data.user.type === 'association') {
-                localStorage.setItem('token', JSON.stringify(resData.data.token));
                 localStorage.setItem('idAassociation', JSON.stringify(resData.data.user._id));
+                this.router.navigate(['/association']);
                 this.role = 'association';
-                this.logged = true;
+              } else if (resData.data.user.type === 'benevole') {
+                localStorage.setItem('idBenevole', JSON.stringify(resData.data.user._id));
+                this.router.navigate(['/benevole']);
+                this.role = 'benevole';
               }
             } else {
               this.role = null;
@@ -68,8 +72,10 @@ export class AuthService {
       // console.log('role', role);
       if (role === 'admin') {
       this.router.navigate(['/admin']);
-      } else {
+      } else if (role === 'association') {
         this.router.navigate(['/association']);
+      } else {
+        this.router.navigate(['/benevole']);
       }
     } else {
       localStorage.clear();

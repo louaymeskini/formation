@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgForm, NgModel} from '@angular/forms';
 import {AssociationService} from '../../../service-layer/store/association/services/association.service';
 import {AssociationModel} from '../../../core/models/association.model';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-ajouter-association',
@@ -15,21 +16,25 @@ export class AjouterAssociationComponent implements OnInit {
    passwordMatch: boolean;
    imgError: boolean;
 
-  constructor(private associationService: AssociationService) { }
+  constructor(private associationService: AssociationService,
+              private spinnerService: NgxSpinnerService) { }
 
   log(val) { console.log(val); }
   ngOnInit() {
   }
 
   ajouterAssociation(form: AssociationModel) {
+    this.spinnerService.show();
     console.log('form', form);
     if (form.password === this.password2.nativeElement.value) {
     form.imageAssociation = this.fileToUpload;
     this.associationService.createAssociation(form);
       this.passwordMatch = true;
+      this.spinnerService.hide();
     } else {
       console.log('password doesn\'t match');
       this.passwordMatch = false;
+      this.spinnerService.hide();
     }
   }
 

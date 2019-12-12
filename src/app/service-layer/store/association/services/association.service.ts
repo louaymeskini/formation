@@ -83,17 +83,10 @@ export class AssociationService {
         {
           headers: new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded'
-            // 'x-access-token': this.token
           }),
           // params: id,
           responseType: 'json'
-        }).subscribe(res => {
-          console.log('res', res);
-          // if (res.state === 'ok') {
-          //   alert('Done.');
-          // }
-        }
-      );
+        });
   }
 
 }

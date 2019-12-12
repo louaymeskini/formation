@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import {AuthComponent} from './auth.component';
 import {AuthRoutingModule} from './auth-routing.module';
 import { RegisterComponent } from './register/register.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AlertModule} from 'ngx-bootstrap';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 
@@ -15,7 +17,10 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AlertModule,
+    NgxSpinnerModule
   ]
 })
 export class AuthModule { }

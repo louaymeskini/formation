@@ -77,6 +77,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/association/association.module').then(as => as.AssociationModule)
       },
       {
+        path: '',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./views/benevole/benevole.module').then(as => as.BenevoleModule)
+      },
+      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },

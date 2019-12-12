@@ -1,12 +1,11 @@
-import {NgForm} from '@angular/forms';
-import {Component, DoCheck, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AssociationService} from '../../service-layer/store/association/services/association.service';
 import {AssociationModel} from '../../core/models/association.model';
 import {environment} from '../../../environments/environment';
-import {map} from 'rxjs/operators';
 import {ModalDirective} from 'ngx-bootstrap/modal';
 import {AlertConfig} from 'ngx-bootstrap';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 export function getAlertConfig(): AlertConfig {
   return Object.assign(new AlertConfig(), { type: 'success' });
@@ -19,13 +18,14 @@ export function getAlertConfig(): AlertConfig {
 export class AdminComponent implements OnInit {
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
   api: string = environment.apiUrl + 'association/img/';
-  listeAssociation: AssociationModel [] = [];
-  listeAssociation2: AssociationModel [] = [];
+  listeAssociation: AssociationModel;
   alertsDeleted: any = [];
   // pageOfItems: Array<any>;
   // deleteName: string;
 
-  constructor(private http: HttpClient, private associationService: AssociationService) {
+  constructor(private http: HttpClient,
+              private associationService: AssociationService,
+              private spinnerService: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -33,25 +33,19 @@ export class AdminComponent implements OnInit {
   }
 
   loadAssociation () {
+    this.spinnerService.show();
     this.associationService.fetchAssociations().subscribe(liste => {
-      // console.log('liste ', liste);
-      // this.listeAssociation = liste;
-      this.listeAssociation2 = [];
-      this.listeAssociation2.push(liste);
-      this.listeAssociation = [].concat.apply([], this.listeAssociation2);
-      // this.listeAssociation = this.listeAssociation2[0]
-      // console.log('listeAssociation ', this.listeAssociation);
+      this.listeAssociation = liste ;
+      this.spinnerService.hide();
+      console.log('listeAssociation ', this.listeAssociation);
     });
   }
 
   supprimerAssociation(association: AssociationModel) {
-    // this.deleteName = association.nom;
     console.log('supprimer');
-    this.associationService.deleteAssociation(association);
-    // this.listeAssociation = [];
-    this.listeAssociation = [];
-    this.loadAssociation();
-    // this.listeAssociation.splice(association, 1)
+    this.associationService.deleteAssociation(association).subscribe(data => {
+      this.loadAssociation();
+    });
     this.add(association.nom);
   }
 

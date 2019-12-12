@@ -5,6 +5,8 @@ export class AdminModel {
   email: string;
   username: string;
   password: string;
+  newPassword?: string;
+  confirmPassword?: string;
   type?: string;
   __v?: any;
   createdAt?: Date;
