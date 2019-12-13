@@ -12,6 +12,7 @@ import {AuthComponent} from './views/auth/auth.component';
 import {AdminGuard} from './views/auth/admin.guard';
 import {AssociationGuard} from './views/auth/association.guard';
 import {AuthGuard} from './views/auth/auth.guard';
+import {BenevoleGuard} from './views/auth/benevole.guard';
 
 export const routes: Routes = [
 
@@ -78,8 +79,8 @@ export const routes: Routes = [
       },
       {
         path: '',
-        canActivate: [AuthGuard],
-        loadChildren: () => import('./views/benevole/benevole.module').then(as => as.BenevoleModule)
+        canActivate: [AuthGuard, BenevoleGuard],
+        loadChildren: () => import('./views/benevole/benevole.module').then(be => be.BenevoleModule)
       },
       {
         path: 'base',

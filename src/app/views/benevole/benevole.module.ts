@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptorService} from '../services/token-interceptor.service';
 import {BenevoleComponent} from './benevole.component';
 import {BenevoleService} from '../../service-layer/store/benevole/services/benevole.service';
+import {BenevoleRoutingModule} from './benevole-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {BenevoleService} from '../../service-layer/store/benevole/services/benev
     ModalModule,
     AlertModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BenevoleRoutingModule
   ],
   providers: [BenevoleService,
     AssociationService,

@@ -19,8 +19,9 @@ export function getAlertConfig(): AlertConfig {
 })
 export class BenevolesComponent implements OnInit {
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
-  benevoles: BenevoleModel;
+  benevoles: BenevoleModel [];
   alertsDeleted: any = [];
+  config: any;
 
   constructor(private benevoleService: BenevoleService,
               private spinnerService: NgxSpinnerService) { }
@@ -32,13 +33,25 @@ export class BenevolesComponent implements OnInit {
   allBenevole () {
     this.spinnerService.show();
     this.benevoleService.fetchBenevoles().subscribe(res  => {
-      console.log('res', res)
-      this.benevoles = res;
+      // @ts-ignore
+      console.log('res', ...res)
+      // @ts-ignore
+      this.benevoles = [...res];
+      this.config = {
+        itemsPerPage: 5,
+        currentPage: 1,
+        totalItems: this.benevoles.length
+      };
       this.spinnerService.hide();
     }, error => {
       throwError(error);
       this.spinnerService.hide();
     });
+  }
+
+  pageChanged(event) {
+    console.log(event);
+    this.config.currentPage = event;
   }
 
   supprimerBenevole(benevole: BenevoleModel) {

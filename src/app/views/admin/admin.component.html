@@ -19,8 +19,8 @@
             <th>Supprimer</th>
           </tr>
           </thead>
-          <tbody>
-          <tr *ngFor="let association of listeAssociation">
+          <tbody *ngIf="listeAssociation">
+          <tr *ngFor="let association of listeAssociation | paginate: config">
             <td><img src="{{api+association.imageAssociation}}" width="50" height="50"></td>
             <td>{{association.nom}}</td>
             <td>{{association.ville}}</td>
@@ -56,19 +56,37 @@
           </tr>
           </tbody>
         </table>
+
         <nav>
-<!--          <jw-pagination [items]="listeAssociation" (changePage)="onChangePage($event)"></jw-pagination>-->
+        <pagination-template #p="paginationApi"
+                             (pageChange)="pageChanged($event)">
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+          <li class="page-item" [class.disabled]="p.isFirstPage()">
+            <a *ngIf="!p.isFirstPage()"
+               (click)="p.previous()"
+               class="page-link"> Précédent </a>
+          </li>
+          <div *ngFor="let page of p.pages"
+               [class.current]="p.getCurrent() === page.value"
+               class="page-item">
+            <a (click)="p.setCurrent(page.value)"
+               *ngIf="p.getCurrent() !== page.value"
+               class="page-link">
+              {{ page.label }}
+            </a>
+            <li *ngIf="p.getCurrent() === page.value" class="page-item active">
+              <a class="page-link">{{ page.label }}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </div>
+          <li [class.disabled]="p.isLastPage()" class="page-item">
+            <a *ngIf="!p.isLastPage()"
+               (click)="p.next()"
+               class="page-link"> Suivant </a>
+          </li>
           </ul>
+        </pagination-template>
         </nav>
+
       </div>
     </div>
   </div>

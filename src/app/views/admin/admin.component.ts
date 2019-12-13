@@ -13,15 +13,15 @@ export function getAlertConfig(): AlertConfig {
 
 @Component({
   templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css'],
   providers: [{ provide: AlertConfig, useFactory: getAlertConfig }]
 })
 export class AdminComponent implements OnInit {
   @ViewChild('dangerModal') public dangerModal: ModalDirective;
   api: string = environment.apiUrl + 'association/img/';
-  listeAssociation: AssociationModel;
+  listeAssociation: AssociationModel [];
   alertsDeleted: any = [];
-  // pageOfItems: Array<any>;
-  // deleteName: string;
+  config: any;
 
   constructor(private http: HttpClient,
               private associationService: AssociationService,
@@ -35,10 +35,23 @@ export class AdminComponent implements OnInit {
   loadAssociation () {
     this.spinnerService.show();
     this.associationService.fetchAssociations().subscribe(liste => {
-      this.listeAssociation = liste ;
+      console.log('liste', liste);
+      // @ts-ignore
+      this.listeAssociation = [...liste];
+      this.config = {
+        itemsPerPage: 5,
+        currentPage: 1,
+        totalItems: this.listeAssociation.length
+      };
+
       this.spinnerService.hide();
-      console.log('listeAssociation ', this.listeAssociation);
+      console.log('listeAssociation ', this.listeAssociation.length);
     });
+  }
+
+  pageChanged(event) {
+    console.log(event);
+    this.config.currentPage = event;
   }
 
   supprimerAssociation(association: AssociationModel) {

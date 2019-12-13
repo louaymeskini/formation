@@ -12,6 +12,7 @@ import {AlertModule, ModalModule} from 'ngx-bootstrap';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ProfileComponent } from './profile/profile.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ModalModule,
     AlertModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPaginationModule
   ],
   providers: [AssociationService,
     {
