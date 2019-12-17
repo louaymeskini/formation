@@ -18,4 +18,5 @@ export class BenevoleModel {
   __v?: any;
   createdAt?: Date;
   updatedAt?: Date;
+  status?: string;
 }

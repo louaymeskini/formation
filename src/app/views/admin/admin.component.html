@@ -15,7 +15,6 @@
             <th>Code Postale</th>
             <th>Téléphone</th>
             <th>Email</th>
-            <th>Modifier</th>
             <th>Supprimer</th>
           </tr>
           </thead>
@@ -28,7 +27,6 @@
             <td>{{association.codePostale}}</td>
             <td>{{association.tel}}</td>
             <td>{{association.email}}</td>
-            <td><i class="fa fa-edit" style="cursor: pointer;"></i></td>
             <td><i class="fa fa-remove"
                    style="cursor: pointer;"
                    (click)="dangerModal.show()"></i></td>

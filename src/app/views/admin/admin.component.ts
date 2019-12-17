@@ -71,10 +71,4 @@ export class AdminComponent implements OnInit {
     });
   }
 
-
-  // onChangePage(pageOfItems: Array<any>) {
-  //   // update current page of items
-  //   this.pageOfItems = pageOfItems;
-  // }
-
 }

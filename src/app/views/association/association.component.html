@@ -2,54 +2,107 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <i class="fa fa-align-justify"></i> Liste des associations
+        <i class="fa fa-align-justify"></i> Liste des benevoles membres
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
+        <table *ngIf="allLength > 0" class="table table-bordered table-striped table-sm">
           <thead>
           <tr>
-            <th>Logo Association</th>
-            <th>Nom Association</th>
+            <th>Nom Benevole</th>
+            <th>Prenom</th>
+            <th>Genre</th>
             <th>Ville</th>
             <th>Adresse</th>
             <th>Code Postale</th>
             <th>Téléphone</th>
             <th>Email</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
+            <th>Status</th>
+            <th>Exclure</th>
           </tr>
           </thead>
-          <tbody>
-          <tr >
-            <td>aaa</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>icon</td>
-            <td>icon2</td>
+          <tbody *ngIf="all">
+          <tr *ngFor="let benevole of all | paginate: config">
+            <td>{{benevole.nom}}</td>
+            <td>{{benevole.prenom}}</td>
+            <td>{{benevole.sexe}}</td>
+            <td>{{benevole.ville}}</td>
+            <td>{{benevole.adresse}}</td>
+            <td>{{benevole.codePostale}}</td>
+            <td>{{benevole.tel}}</td>
+            <td>{{benevole.email}}</td>
+
+            <td *ngIf="benevole.status === 'oui'">
+              <i class="badge badge-success">Membre</i>
+            </td>
+            <td *ngIf="benevole.status === 'oui'">
+              <i class="fa fa-user-times"
+                   style="cursor: pointer"
+                   (click)="exclureMembre(benevole)"></i>
+            </td>
+
+            <td *ngIf="benevole.status === 'non'">
+              <i class="badge badge-warning"
+                   style="cursor: pointer"
+                   (click)="AcceptMembre(benevole)">En Attente</i>
+            </td>
+            <td *ngIf="benevole.status === 'non'">
+              <i class="fa fa-user-times"
+                   style="cursor: pointer"
+                   (click)="exclureMembre(benevole)"></i>
+            </td>
           </tr>
           </tbody>
         </table>
-        <nav>
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
+        <div *ngIf="allLength === 0">
+          <div *ngFor="let alert of alertsEmpty">
+            <alert [type]="alert.type"
+                   [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+          </div>
+        </div>
+        <nav *ngIf="allLength > 0">
+          <pagination-template #p="paginationApi"
+                               id="pagination1"
+                               (pageChange)="pageChanged($event)">
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="p.isFirstPage()">
+                <a *ngIf="!p.isFirstPage()"
+                   (click)="p.previous()"
+                   class="page-link"> Précédent </a>
+              </li>
+              <div *ngFor="let page of p.pages"
+                   [class.current]="p.getCurrent() === page.value"
+                   class="page-item">
+                <a (click)="p.setCurrent(page.value)"
+                   *ngIf="p.getCurrent() !== page.value"
+                   class="page-link">
+                  {{ page.label }}
+                </a>
+                <li *ngIf="p.getCurrent() === page.value" class="page-item active">
+                  <a class="page-link">{{ page.label }}</a>
+                </li>
+              </div>
+              <li [class.disabled]="p.isLastPage()" class="page-item">
+                <a *ngIf="!p.isLastPage()"
+                   (click)="p.next()"
+                   class="page-link"> Suivant </a>
+              </li>
+            </ul>
+          </pagination-template>
         </nav>
+
       </div>
     </div>
   </div>
   <!--/.col-->
 </div>
+
+
+<div *ngFor="let alert of alertsDeleted">
+  <alert [type]="alert.type"
+         [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+</div>
+
+
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Attendez SVP... </p>
 </ngx-spinner>

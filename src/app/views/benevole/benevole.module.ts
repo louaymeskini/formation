@@ -9,6 +9,7 @@ import {TokenInterceptorService} from '../services/token-interceptor.service';
 import {BenevoleComponent} from './benevole.component';
 import {BenevoleService} from '../../service-layer/store/benevole/services/benevole.service';
 import {BenevoleRoutingModule} from './benevole-routing.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {BenevoleRoutingModule} from './benevole-routing.module';
     AlertModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    BenevoleRoutingModule
+    BenevoleRoutingModule,
+    NgxPaginationModule
   ],
   providers: [BenevoleService,
     AssociationService,

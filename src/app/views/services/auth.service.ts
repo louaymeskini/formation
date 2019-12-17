@@ -43,7 +43,7 @@ export class AuthService {
                 this.router.navigate(['/admin']);
                 this.role = 'admin';
               } else if (resData.data.user.type === 'association') {
-                localStorage.setItem('idAassociation', JSON.stringify(resData.data.user._id));
+                localStorage.setItem('idAssociation', JSON.stringify(resData.data.user._id));
                 this.router.navigate(['/association']);
                 this.role = 'association';
               } else if (resData.data.user.type === 'benevole') {

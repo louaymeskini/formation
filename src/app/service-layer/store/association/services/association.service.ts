@@ -5,6 +5,7 @@ import {AssociationModel} from '../../../../core/models/association.model';
 import {throwError} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
+import {BenevoleModel} from '../../../../core/models/benevole.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,15 @@ import {Router} from '@angular/router';
 export class AssociationService {
   api: string = environment.apiUrl + 'association';
   token = JSON.parse(localStorage.getItem('token'));
+  idAssociation = JSON.parse(localStorage.getItem('idAssociation'));
 
   // fileToUpload: File = null;
 
   constructor(private http: HttpClient, private router: Router) {
+  }
+
+  static getIDAssociation() {
+    return JSON.parse(localStorage.getItem('idAssociation'));
   }
 
   fetchAssociations() {
@@ -26,7 +32,7 @@ export class AssociationService {
         {
           headers: new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
-             // 'x-access-token': this.token
+            // 'x-access-token': this.token
           }), // 'x-access-token': localStorage.getItem('token')
           responseType: 'json'
         }
@@ -88,5 +94,57 @@ export class AssociationService {
           responseType: 'json'
         });
   }
+
+  fetchAssociationBenevole() {
+    return this.http.get<{
+      oui: BenevoleModel [],
+      non: BenevoleModel []
+    }>(
+      this.api + '/all/benevole/' + AssociationService.getIDAssociation(),
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  acceptBenevole(benevole: BenevoleModel) {
+    return this.http.put<{state: string, msg: string,
+    result?: AssociationModel}>(
+      this.api + '/ajout/' + AssociationService.getIDAssociation() + '/benevole/' + benevole._id,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  exclureBenevoleMembre(benevole: BenevoleModel) {
+    return this.http.put<{state: string, msg: string}>(
+      this.api + '/supp/' + AssociationService.getIDAssociation() + '/benevole/' + benevole._id,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: any) {
+    console.error(error);
+    return throwError(error);
+  }
+
 
 }

@@ -17,4 +17,5 @@ export class AssociationModel {
   __v?: any;
   createdAt?: Date;
   updatedAt?: Date;
+  status?: string;
 }

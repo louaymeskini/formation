@@ -3,12 +3,12 @@ import {INavData} from '@coreui/angular';
 export const associationNav: INavData[] = [
   {
     name: 'Benevoles Membres',
-    url: '/home/benevoles/membre',
+    url: '/association',
     icon: 'icon-user',
     children: [
       {
         name: 'Liste Benevoles',
-        url: '/home/benevoles/membre',
+        url: '/association',
         icon: 'icon-user',
       }
     ]
@@ -32,17 +32,17 @@ export const associationNav: INavData[] = [
   },
   {
     name: 'Annonces',
-    url: '/home/annonce',
+    url: '/association/annonces',
     icon: 'icon-note',
     children: [
       {
         name: 'Liste Annonces',
-        url: '/home/annonce',
+        url: '/association/annonces',
         icon: 'icon-note',
       },
       {
         name: 'Ajouter Annonce',
-        url: '/home/annonce/ajouter',
+        url: '/association/annonces/ajouter',
         icon: 'icon-note',
       }
     ]

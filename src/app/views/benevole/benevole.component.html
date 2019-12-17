@@ -1,1 +1,106 @@
-<p>benevole works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Liste des associations
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+          <tr>
+            <th>Logo Association</th>
+            <th>Nom Association</th>
+            <th>Ville</th>
+            <th>Adresse</th>
+            <th>Code Postale</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Quitter</th>
+          </tr>
+          </thead>
+
+          <tbody *ngIf="all">
+          <tr *ngFor="let association of all | paginate: config">
+            <td><img src="{{api+association.imageAssociation}}" width="50" height="50"></td>
+            <td>{{association.nom}}</td>
+            <td>{{association.ville}}</td>
+            <td>{{association.adresse}}</td>
+            <td>{{association.codePostale}}</td>
+            <td>{{association.tel}}</td>
+            <td>{{association.email}}</td>
+
+            <td *ngIf="association.status === 'non'">
+              <i class="badge badge-info" style="cursor: pointer;"
+                   (click)="joindreAssociation(association)">Joindre</i>
+            </td>
+            <td *ngIf="association.status === 'non'">
+              <i class="fa fa-ban"></i>
+            </td>
+
+            <td *ngIf="association.status === 'cours'">
+              <i class="badge badge-warning">En Cours</i>
+            </td>
+            <td *ngIf="association.status === 'cours'">
+              <i class="fa fa-sign-out" style="cursor: pointer;"
+                 (click)="quitterAssociation(association)"></i>
+            </td>
+
+            <td *ngIf="association.status === 'oui'">
+              <i class="badge badge-success">Membre</i>
+            </td>
+            <td *ngIf="association.status === 'oui'">
+              <i class="fa fa-sign-out" style="cursor: pointer;"
+                 (click)="quitterAssociation(association)"></i>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+
+        <nav>
+          <pagination-template #p="paginationApi"
+                               id="pagination1"
+                               (pageChange)="pageChanged($event)">
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="p.isFirstPage()">
+                <a *ngIf="!p.isFirstPage()"
+                   (click)="p.previous()"
+                   class="page-link"> Précédent </a>
+              </li>
+              <div *ngFor="let page of p.pages"
+                   [class.current]="p.getCurrent() === page.value"
+                   class="page-item">
+                <a (click)="p.setCurrent(page.value)"
+                   *ngIf="p.getCurrent() !== page.value"
+                   class="page-link">
+                  {{ page.label }}
+                </a>
+                <li *ngIf="p.getCurrent() === page.value" class="page-item active">
+                  <a class="page-link">{{ page.label }}</a>
+                </li>
+              </div>
+              <li [class.disabled]="p.isLastPage()" class="page-item">
+                <a *ngIf="!p.isLastPage()"
+                   (click)="p.next()"
+                   class="page-link"> Suivant </a>
+              </li>
+            </ul>
+          </pagination-template>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+
+<!--<div *ngFor="let alert of alertsDeleted">-->
+<!--  <alert [type]="alert.type"-->
+<!--         [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>-->
+<!--</div>-->
+
+<!--<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">-->
+<!--  <p style="color: white">Attendez SVP... </p>-->
+<!--</ngx-spinner>-->
+
