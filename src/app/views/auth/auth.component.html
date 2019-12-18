@@ -45,9 +45,11 @@
                     </div>
                   </div>
                 </form>
+                <div *ngIf="error !== null">
                 <div *ngFor="let alert of alertsError">
                   <alert [type]="alert.type"
                          [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg | titlecase }}</strong></alert>
+                </div>
                 </div>
               </div>
             </div>

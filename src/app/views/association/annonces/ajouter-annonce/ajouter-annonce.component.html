@@ -4,28 +4,34 @@
       <small>Créer</small>
       <strong>Annonce</strong>
     </div>
-    <form [formGroup]="annonceForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="annonceForm" (ngSubmit)="onSubmit(annonceForm.value)">
       <div class="card-body">
         <div class="form-group">
           <label for="titre">Titre annonce</label>
           <input type="text"
                  class="form-control"
+                 [ngClass]="{error: ((titre.dirty || titre.touched) && titre.invalid && titre.errors)}"
                  id="titre"
                  formControlName="titre"
                  placeholder="Entrer le nom de l'administrateur"
           required>
-          <small class="help-block red">
+          <small class="help-block red"
+                 *ngIf="(titre.dirty || titre.touched) && titre.invalid && titre.errors">
             Vous devez vérifier le titre de l'annonce!</small>
         </div>
         <div class="form-group">
-          <label for="sujet">sujet</label>
-          <input type="text"
-                 class="form-control"
-                 id="sujet"
-                 formControlName="sujet"
-                 placeholder="Entrer le prenom de l'administrateur"
-          required>
-          <small class="help-block red">
+          <label for="sujet">Sujet</label>
+          <textarea id="sujet"
+                    name="textarea-input"
+                    formControlName="sujet"
+                    [ngClass]="{error: ((sujet.dirty || sujet.touched) && sujet.invalid && sujet.errors)}"
+                    rows="5"
+                    class="form-control"
+                    placeholder="..."
+                    required>
+          </textarea>
+          <small class="help-block red"
+                 *ngIf="(sujet.dirty || sujet.touched) && sujet.invalid && sujet.errors">
             Vous devez vérifier le sujet de l'annonce!</small>
         </div>
         <div class="form-group">
@@ -34,16 +40,20 @@
             <input type="file"
                    id="pieceJointe"
                    name="pieceJointe"
+                   (change)="handleFileInput($event.target.files)"
+                   [ngClass]="{'ng-valid': !imgError}"
                    formControlName="pieceJointe"
                    required>
             <br>
-            <small class="help-block red">
-              Vérifier l'image! (PNG/JPG/JPEG/PDF/DOC)</small>
+            <small class="help-block red"
+                   *ngIf="(pieceJointe !== null && pieceJointe.errors) || imgError === true">
+              Vérifier votre fichier! (PNG/JPG/JPEG/PDF/DOC)</small>
           </div>
         </div>
       </div>
         <div class="card-footer">
           <button type="submit"
+                  [disabled]="!annonceForm.valid || imgError === true"
                   size="sm"
                   class="btn btn-sm btn-primary">
             <i class="fa fa-dot-circle-o"></i> Ajouter

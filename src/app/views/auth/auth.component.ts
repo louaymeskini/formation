@@ -15,7 +15,7 @@ export function getAlertConfig(): AlertConfig {
   templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
-  error: string;
+  error: string = null;
   alertsError: any = [];
 
   constructor(private authService: AuthService, private router: Router,
@@ -37,12 +37,14 @@ export class AuthComponent implements OnInit {
     // console.log(username, password);
     this.authService.login(username, password).subscribe(resData => {
       console.log('component', resData);
-      if (resData.status !== 'ok') {
+      if (resData.status === 'success') {
+        this.spinnerService.hide();
+      } else {
+        console.log('invalidddddd');
         this.error = 'username / mot de passe invalide !';
         this.errorNotif(this.error);
         this.spinnerService.hide();
       }
-        this.spinnerService.hide();
     },
       error1 => {
       throwError(error1);

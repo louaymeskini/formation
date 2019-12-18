@@ -1,1 +1,93 @@
-<p>annonces works!</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Liste des annonces
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+          <tr>
+            <th>Titre annonce</th>
+            <th>Sujet</th>
+            <th>Pièce jointe</th>
+            <th>Supprimer</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="annonces.length">
+          <tr *ngFor="let annonce of annonces | paginate: config">
+            <td>{{annonce.titre}}</td>
+            <td>{{annonce.sujet}}</td>
+            <td><a href="{{associationService.apiAnnonce + '/fichier/' + annonce.pieceJointe}}">{{annonce.pieceJointe}}</a></td>
+            <td><i class="fa fa-remove"
+                   style="cursor: pointer;"
+                   ></i></td>
+
+<!--            <div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--              <div class="modal-dialog modal-danger" role="document">-->
+<!--                <div class="modal-content">-->
+<!--                  <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Supprimer Association</h4>-->
+<!--                    <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">-->
+<!--                      <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                  <div class="modal-body">-->
+<!--                    <p>Voulez-vous vraiment supprimer l'association <strong>{{association.nom | uppercase}}</strong></p>-->
+<!--                  </div>-->
+<!--                  <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">Annuler</button>-->
+<!--                    <button type="button" class="btn btn-danger" (click)="supprimerAssociation(association)">Supprimer</button>-->
+<!--                  </div>-->
+<!--                </div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+<!--              </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--            </div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+          </tr>
+          </tbody>
+        </table>
+
+        <nav>
+          <pagination-template #p="paginationApi"
+                               (pageChange)="pageChanged($event)">
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="p.isFirstPage()">
+                <a *ngIf="!p.isFirstPage()"
+                   (click)="p.previous()"
+                   class="page-link"> Précédent </a>
+              </li>
+              <div *ngFor="let page of p.pages"
+                   [class.current]="p.getCurrent() === page.value"
+                   class="page-item">
+                <a (click)="p.setCurrent(page.value)"
+                   *ngIf="p.getCurrent() !== page.value"
+                   class="page-link">
+                  {{ page.label }}
+                </a>
+                <li *ngIf="p.getCurrent() === page.value" class="page-item active">
+                  <a class="page-link">{{ page.label }}</a>
+                </li>
+              </div>
+              <li [class.disabled]="p.isLastPage()" class="page-item">
+                <a *ngIf="!p.isLastPage()"
+                   (click)="p.next()"
+                   class="page-link"> Suivant </a>
+              </li>
+            </ul>
+          </pagination-template>
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+
+<!--<div *ngFor="let alert of alertsDeleted">-->
+<!--  <alert [type]="alert.type"-->
+<!--         [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>-->
+<!--</div>-->
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+  <p style="color: white">Attendez SVP... </p>
+</ngx-spinner>

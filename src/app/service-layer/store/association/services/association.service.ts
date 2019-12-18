@@ -6,12 +6,15 @@ import {throwError} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
 import {BenevoleModel} from '../../../../core/models/benevole.model';
+import {AnnonceModel} from '../../../../core/models/annonce.model';
+import {stringify} from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssociationService {
   api: string = environment.apiUrl + 'association';
+  apiAnnonce: string = environment.apiUrl + 'annonce';
   token = JSON.parse(localStorage.getItem('token'));
   idAssociation = JSON.parse(localStorage.getItem('idAssociation'));
 
@@ -141,10 +144,59 @@ export class AssociationService {
     );
   }
 
+  // annonces of associations
+
+  fetchAnnonces() {
+    return this.http.get<{AnnonceModel}>(
+      this.apiAnnonce + '/all',
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      map(responseData => {
+        return responseData;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  createAnnonce(annonce: AnnonceModel) {
+    const formData: FormData = new FormData();
+    formData.append('titre', annonce.titre);
+    formData.append('sujet', annonce.sujet);
+    formData.append('pieceJointe', annonce.pieceJointe);
+    console.log('annonce', annonce);
+    return this.http.post<{state: string, msg: string | AnnonceModel}>(
+      this.apiAnnonce + '/ajouter/' + AssociationService.getIDAssociation(),
+      formData,
+      {
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteAnnonce(annonce: AnnonceModel) {
+    return this.http.delete<{state: string, msg: string}>(
+      this.apiAnnonce + '/supprimer/' + annonce._id,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
     console.error(error);
     return throwError(error);
   }
-
 
 }

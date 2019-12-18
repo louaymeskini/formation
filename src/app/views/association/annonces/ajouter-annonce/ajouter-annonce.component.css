@@ -1,0 +1,12 @@
+.error {
+  border: 1px solid red;
+}
+
+.red {
+  color: red;
+}
+
+.ng-valid.required {
+  /*background-color: lightgreen;*/
+  border: 1px solid lightgreen
+}
