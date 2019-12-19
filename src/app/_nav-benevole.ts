@@ -12,5 +12,17 @@ export const benevoleNav: INavData [] = [
         icon: 'icon-user',
       }
     ]
+  },
+  {
+    name: 'Annonces',
+    url: '/benevole/annonces',
+    icon: 'icon-note',
+    children: [
+      {
+        name: 'Liste Annonces',
+        url: '/benevole/annonces',
+        icon: 'icon-note',
+      }
+    ]
   }
 ];

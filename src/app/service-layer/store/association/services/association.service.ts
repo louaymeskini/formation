@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {BenevoleModel} from '../../../../core/models/benevole.model';
 import {AnnonceModel} from '../../../../core/models/annonce.model';
 import {stringify} from '@angular/compiler/src/util';
+import {EvenementModel} from '../../../../core/models/evenement.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import {stringify} from '@angular/compiler/src/util';
 export class AssociationService {
   api: string = environment.apiUrl + 'association';
   apiAnnonce: string = environment.apiUrl + 'annonce';
+  apiEvenement: string = environment.apiUrl + 'evenement';
   token = JSON.parse(localStorage.getItem('token'));
   idAssociation = JSON.parse(localStorage.getItem('idAssociation'));
 
@@ -148,7 +150,7 @@ export class AssociationService {
 
   fetchAnnonces() {
     return this.http.get<{AnnonceModel}>(
-      this.apiAnnonce + '/all',
+      this.api + '/liste/annonce/' + AssociationService.getIDAssociation(),
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -183,6 +185,37 @@ export class AssociationService {
   deleteAnnonce(annonce: AnnonceModel) {
     return this.http.delete<{state: string, msg: string}>(
       this.apiAnnonce + '/supprimer/' + annonce._id,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // events of associations
+
+  fetchEvenements() {
+    return this.http.get<{state: string, msg: string | EvenementModel}>(
+        this.api + '/liste/evenement/' + AssociationService.getIDAssociation(),
+          {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json'
+            }),
+            responseType: 'json'
+          }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  createEvenements(evenement: EvenementModel) {
+    return this.http.post<{state: string, msg: string | EvenementModel}>(
+      this.apiEvenement + '/ajouter/' + AssociationService.getIDAssociation(),
+      JSON.stringify(evenement),
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'

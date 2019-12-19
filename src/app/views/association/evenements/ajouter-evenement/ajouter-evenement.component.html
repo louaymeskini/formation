@@ -1,0 +1,93 @@
+<div class="col-sm-12">
+  <div class="card">
+    <div class="card-header">
+      <small>Créer</small>
+      <strong>Evenement</strong>
+    </div>
+    <form [formGroup]="evenementForm" (ngSubmit)="onSubmit(evenementForm.value)">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="titre">Titre Evenement</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{error: (titre.dirty || titre.touched) && titre.invalid && titre.errors}"
+                 id="titre"
+                 formControlName="titre"
+                 placeholder="Entrer le titre de l'evenement"
+                 required>
+          <small class="help-block red"
+                 *ngIf="(titre.dirty || titre.touched) && titre.invalid && titre.errors">
+            Vous devez vérifier le titre de l'evenement!</small>
+        </div>
+        <div class="form-group">
+          <label for="sujet">Sujet</label>
+          <textarea id="sujet"
+                    name="textarea-input"
+                    formControlName="sujet"
+                    [ngClass]="{error: (sujet.dirty || sujet.touched) && sujet.invalid && sujet.errors}"
+                    rows="5"
+                    class="form-control"
+                    placeholder="..."
+                    required>
+          </textarea>
+          <small class="help-block red"
+                 *ngIf="(sujet.dirty || sujet.touched) && sujet.invalid && sujet.errors">
+            Vous devez vérifier le sujet de l'annonce!</small>
+        </div>
+        <div class="form-group">
+          <label for="ville">Ville</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{error: (ville.dirty || ville.touched) && ville.invalid && ville.errors}"
+                 id="ville"
+                 formControlName="ville"
+                 placeholder="Entrer la ville de l'evenement"
+                 required>
+          <small class="help-block red"
+                 *ngIf="(ville.dirty || ville.touched) && ville.invalid && ville.errors">
+            Vous devez vérifier la ville de l'evenement!</small>
+        </div>
+        <div class="form-group">
+          <label for="adresse">Adresse</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{error: (adresse.dirty || adresse.touched) && adresse.invalid && adresse.errors}"
+                 id="adresse"
+                 formControlName="adresse"
+                 placeholder="Entrer l'adresse' de l'evenement"
+                 required>
+          <small class="help-block red"
+                 *ngIf="(adresse.dirty || adresse.touched) && adresse.invalid && adresse.errors">
+            Vous devez vérifier l'adresse' de l'evenement!</small>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+            <input class="form-control"
+                   id="date"
+                   type="date"
+                   formControlName="date"
+                   [ngClass]="{error: (date.dirty || date.touched) && date.invalid && date.errors}"
+            required>
+            <small class="help-block red"
+                   *ngIf="(date.dirty || date.touched) && date.invalid && date.errors">
+              Vous devez vérifier la date de l'evenement!</small>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit"
+                size="sm"
+                class="btn btn-sm btn-primary"
+        [disabled]="!evenementForm.valid">
+          <i class="fa fa-dot-circle-o"></i> Ajouter
+        </button>
+        <button type="reset" size="sm" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Annuler</button>
+      </div>
+
+    </form>
+  </div>
+</div><!--/.col-->
+
+<!--<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">-->
+<!--  <p style="color: white">Attendez SVP... </p>-->
+<!--</ngx-spinner>-->
+

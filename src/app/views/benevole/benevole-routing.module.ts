@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BenevoleComponent} from './benevole.component';
+import {AnnoncesComponent} from './annonces/annonces.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,6 +14,13 @@ const routes: Routes = [{
       component: BenevoleComponent,
       data: {
         title: 'benevole'
+      }
+    },
+    {
+      path: 'benevole/annonces',
+      component: AnnoncesComponent,
+      data: {
+        title: 'annonces'
       }
     }
   ]

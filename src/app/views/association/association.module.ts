@@ -8,12 +8,16 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {AlertModule} from 'ngx-bootstrap';
 import { AnnoncesComponent } from './annonces/annonces.component';
 import { AjouterAnnonceComponent } from './annonces/ajouter-annonce/ajouter-annonce.component';
+import { EvenementsComponent } from './evenements/evenements.component';
+import { AjouterEvenementComponent } from './evenements/ajouter-evenement/ajouter-evenement.component';
 
 @NgModule({
   declarations: [
     AssociationComponent,
     AnnoncesComponent,
-    AjouterAnnonceComponent
+    AjouterAnnonceComponent,
+    EvenementsComponent,
+    AjouterEvenementComponent
   ],
   imports: [
     CommonModule,

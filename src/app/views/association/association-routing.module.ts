@@ -4,6 +4,8 @@ import {NgModule} from '@angular/core';
 import {AssociationComponent} from './association.component';
 import {AnnoncesComponent} from './annonces/annonces.component';
 import {AjouterAnnonceComponent} from './annonces/ajouter-annonce/ajouter-annonce.component';
+import {EvenementsComponent} from './evenements/evenements.component';
+import {AjouterEvenementComponent} from './evenements/ajouter-evenement/ajouter-evenement.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +18,20 @@ const routes: Routes = [{
       component: AssociationComponent,
       data: {
         title: 'association'
+      }
+    },
+    {
+      path: 'association/evenements',
+      component: EvenementsComponent,
+      data: {
+        title: 'Evnements'
+      }
+    },
+    {
+      path: 'association/evenements/ajouter',
+      component: AjouterEvenementComponent,
+      data: {
+        title: 'Evnements'
       }
     },
     {

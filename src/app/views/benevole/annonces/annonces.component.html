@@ -11,38 +11,15 @@
             <th>Titre annonce</th>
             <th>Sujet</th>
             <th>Pièce jointe</th>
-            <th>Supprimer</th>
+            <th>Propriétaire</th>
           </tr>
           </thead>
           <tbody *ngIf="annonces.length">
           <tr *ngFor="let annonce of annonces | paginate: config">
             <td>{{annonce.titre}}</td>
             <td>{{annonce.sujet}}</td>
-            <td><a href="{{associationService.apiAnnonce + '/fichier/' + annonce.pieceJointe}}">{{annonce.pieceJointe}}</a></td>
-            <td><i class="fa fa-remove"
-                   style="cursor: pointer;"
-                   (click)="supprimerAnnonce(annonce)"></i></td>
-
-<!--            <div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-<!--              <div class="modal-dialog modal-danger" role="document">-->
-<!--                <div class="modal-content">-->
-<!--                  <div class="modal-header">-->
-<!--                    <h4 class="modal-title">Supprimer Association</h4>-->
-<!--                    <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">-->
-<!--                      <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                  </div>-->
-<!--                  <div class="modal-body">-->
-<!--                    <p>Voulez-vous vraiment supprimer l'association <strong>{{association.nom | uppercase}}</strong></p>-->
-<!--                  </div>-->
-<!--                  <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">Annuler</button>-->
-<!--                    <button type="button" class="btn btn-danger" (click)="supprimerAssociation(association)">Supprimer</button>-->
-<!--                  </div>-->
-<!--                </div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-<!--              </div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; /.modal &ndash;&gt;-->
-
+            <td><a href="{{apiAnnonce + '/fichier/' + annonce.pieceJointe}}">{{annonce.pieceJointe}}</a></td>
+            <td><i>{{annonce.association.nom | titlecase}}</i></td>
           </tr>
           </tbody>
         </table>
@@ -96,3 +73,4 @@
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Attendez SVP... </p>
 </ngx-spinner>
+

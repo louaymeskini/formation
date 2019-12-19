@@ -120,6 +120,23 @@ export class BenevoleService {
     );
   }
 
+  fetchAnnonces() {
+    return this.http.get<{AnnonceModel}>(
+      this.api + 'liste/annonce/' + BenevoleService.getIDbenevole(),
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      map(responseData => {
+        return responseData[0].annonces;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
     console.error(error);
     return throwError(error);

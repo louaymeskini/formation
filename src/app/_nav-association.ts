@@ -15,17 +15,17 @@ export const associationNav: INavData[] = [
   },
   {
     name: 'Evenements',
-    url: '/home/evenement',
+    url: '/association/evenements',
     icon: 'icon-calendar',
     children: [
       {
         name: 'Liste Evenements',
-        url: '/home/evenement',
+        url: '/association/evenements',
         icon: 'icon-calendar',
       },
       {
         name: 'Ajouter Evenements',
-        url: '/home/evenement/ajouter',
+        url: '/association/evenements/ajouter',
         icon: 'icon-calendar',
       }
     ]
