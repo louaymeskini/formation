@@ -13,7 +13,7 @@
             <th>Ville</th>
             <th>Adresse</th>
             <th>Date</th>
-            <th>Supprimer</th>
+            <th>Propriétaire</th>
           </tr>
           </thead>
           <tbody *ngIf="evenements.length">
@@ -23,10 +23,7 @@
             <td>{{evenement.ville}}</td>
             <td>{{evenement.adresse}}</td>
             <td>{{evenement.date | date}}</td>
-            <td><i class="fa fa-remove"
-                   style="cursor: pointer;"
-            (click)="supprimerEvenement(evenement)"></i></td>
-
+            <td><i>{{evenement.association.nom | titlecase}}</i></td>
           </tr>
           </tbody>
         </table>
@@ -72,6 +69,10 @@
   <!--/.col-->
 </div>
 
+<!--<div *ngFor="let alert of alertsDeleted">-->
+<!--  <alert [type]="alert.type"-->
+<!--         [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>-->
+<!--</div>-->
 
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Attendez SVP... </p>

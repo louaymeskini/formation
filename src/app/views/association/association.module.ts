@@ -10,6 +10,7 @@ import { AnnoncesComponent } from './annonces/annonces.component';
 import { AjouterAnnonceComponent } from './annonces/ajouter-annonce/ajouter-annonce.component';
 import { EvenementsComponent } from './evenements/evenements.component';
 import { AjouterEvenementComponent } from './evenements/ajouter-evenement/ajouter-evenement.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AjouterEvenementComponent } from './evenements/ajouter-evenement/ajoute
     AnnoncesComponent,
     AjouterAnnonceComponent,
     EvenementsComponent,
-    AjouterEvenementComponent
+    AjouterEvenementComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

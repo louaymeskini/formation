@@ -7,7 +7,6 @@ import {environment} from '../../../../../environments/environment';
 import {Router} from '@angular/router';
 import {BenevoleModel} from '../../../../core/models/benevole.model';
 import {AnnonceModel} from '../../../../core/models/annonce.model';
-import {stringify} from '@angular/compiler/src/util';
 import {EvenementModel} from '../../../../core/models/evenement.model';
 
 @Injectable({
@@ -49,6 +48,25 @@ export class AssociationService {
         }),
         catchError(errorRes => {
           // Send to analytics server
+          return throwError(errorRes);
+        })
+      );
+  }
+
+  fetchAssociation() {
+    // console.log('token ', token);
+    return this.http
+      .get<AssociationModel>(
+        this.api + '/' + AssociationService.getIDAssociation(),
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+          responseType: 'json'
+        }
+      )
+      .pipe(
+        catchError(errorRes => {
           return throwError(errorRes);
         })
       );
@@ -146,6 +164,28 @@ export class AssociationService {
     );
   }
 
+  updateAssociation(association: AssociationModel) {
+    const formData: FormData = new FormData();
+    formData.append('imageAssociation', association.imageAssociation);
+    formData.append('nom', association.nom);
+    formData.append('adresse', association.adresse);
+    formData.append('ville', association.ville);
+    formData.append('codePostale', association.codePostale);
+    formData.append('tel', association.tel);
+    formData.append('email', association.email);
+    formData.append('username', association.username);
+    formData.append('password', association.password);
+    return this.http.put<{state: string, msg: string}>(
+      this.api + '/modifier/' + AssociationService.getIDAssociation() + '/img',
+      formData,
+      {
+        responseType: 'json'
+      }
+    ).pipe(
+        catchError(this.handleError)
+    );
+  }
+
   // annonces of associations
 
   fetchAnnonces() {
@@ -208,14 +248,31 @@ export class AssociationService {
             responseType: 'json'
           }
     ).pipe(
+      map(responseData => {
+        return responseData[0].evenements;
+      }),
       catchError(this.handleError)
     );
   }
 
   createEvenements(evenement: EvenementModel) {
-    return this.http.post<{state: string, msg: string | EvenementModel}>(
+    return this.http.post<{state?: string, msg?: string, evenement?: EvenementModel}>(
       this.apiEvenement + '/ajouter/' + AssociationService.getIDAssociation(),
       JSON.stringify(evenement),
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteEvenements(evenement: EvenementModel) {
+    return this.http.delete<{state: string, msg: string}>(
+      this.apiEvenement + '/supprimer/' + evenement._id,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'

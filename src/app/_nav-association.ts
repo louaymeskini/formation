@@ -47,16 +47,16 @@ export const associationNav: INavData[] = [
       }
     ]
   },
-  {
-    name: 'Association',
-    url: '/home/association/profile',
-    icon: 'icon-settings',
-    children: [
-      {
-        name: 'Modifier Association',
-        url: '/home/profile',
-        icon: 'icon-settings',
-      }
-    ]
-  }
+  // {
+  //   name: 'Profile',
+  //   url: '/association/profile',
+  //   icon: 'icon-settings',
+  //   children: [
+  //     {
+  //       name: 'Modifier profile',
+  //       url: '/association/profile',
+  //       icon: 'icon-settings',
+  //     }
+  //   ]
+  // }
 ];

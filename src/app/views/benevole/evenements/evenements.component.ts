@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {EvenementModel} from '../../../core/models/evenement.model';
-import {AssociationService} from '../../../service-layer/store/association/services/association.service';
-import {NgxSpinnerService} from 'ngx-spinner';
+import {BenevoleService} from '../../../service-layer/store/benevole/services/benevole.service';
 import {throwError} from 'rxjs';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {EvenementModel} from '../../../core/models/evenement.model';
 import {AlertConfig} from 'ngx-bootstrap';
 
 export function getAlertConfig(): AlertConfig {
@@ -20,16 +20,17 @@ export class EvenementsComponent implements OnInit {
   config: any;
   alertsEmpty: any = [];
 
-  constructor(private associationService: AssociationService,
+  constructor(private benevoleService: BenevoleService,
               private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.loadEvenement();
+    this.loadEvenements();
   }
 
-  loadEvenement() {
+  loadEvenements() {
     this.spinnerService.show();
-    this.associationService.fetchEvenements().subscribe(res => {
+    this.benevoleService.fetchEvenements().subscribe(res => {
+      // @ts-ignore
       this.evenements = res;
       this.config = {
         itemsPerPage: 5,
@@ -38,28 +39,10 @@ export class EvenementsComponent implements OnInit {
       };
       if (this.evenements.length === 0) {
         const type = 'info';
-        const msg = 'Vous n\'avez pas des évenements :)';
+        const msg = 'Vous n\'avez pas des évenements';
         this.notificationEmty(type, msg);
       }
       this.spinnerService.hide();
-    }, error => {
-      throwError(error);
-      const type = 'warning';
-      const msg = 'Erreur inconnue :(';
-      this.spinnerService.hide();
-      this.notificationEmty(type, msg);
-    });
-  }
-
-  supprimerEvenement(evenement: EvenementModel) {
-    this.spinnerService.show();
-    this.associationService.deleteEvenements(evenement).subscribe(res => {
-      console.log(res);
-      if (res.state === 'ok') {
-        this.evenements = [];
-        this.loadEvenement();
-        this.spinnerService.hide();
-      }
     }, error => {
       throwError(error);
       const type = 'warning';

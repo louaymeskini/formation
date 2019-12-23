@@ -4,6 +4,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {EvenementModel} from '../../../../core/models/evenement.model';
 import {throwError} from 'rxjs';
 import {AssociationService} from '../../../../service-layer/store/association/services/association.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ajouter-evenement',
@@ -15,7 +16,8 @@ export class AjouterEvenementComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private spinnerService: NgxSpinnerService,
-              private associationService: AssociationService) {
+              private associationService: AssociationService,
+              private router: Router) {
     this.validate();
   }
 
@@ -34,8 +36,17 @@ export class AjouterEvenementComponent implements OnInit {
   }
 
   onSubmit(evenement: EvenementModel) {
-    console.log('evenement', evenement);
-    console.log('evenementForm', this.evenementForm);
+    this.spinnerService.show();
+    this.associationService.createEvenements(evenement).subscribe(res => {
+        if (!res.state) {
+          this.router.navigate(['/association/evenements']);
+          this.spinnerService.hide();
+        }
+    },
+      error => {
+      throwError(error);
+      this.spinnerService.hide();
+      });
   }
 
   get titre() {

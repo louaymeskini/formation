@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {AssociationModel} from '../../../../core/models/association.model';
+import {EvenementModel} from '../../../../core/models/evenement.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import {AssociationModel} from '../../../../core/models/association.model';
 export class BenevoleService {
 
   api: string = environment.apiUrl + 'benevole/';
+  apiEvenement: string = environment.apiUrl + 'evenement';
   token = JSON.parse(localStorage.getItem('token'));
   idBenevole = JSON.parse(localStorage.getItem('idBenevole'));
 
@@ -39,12 +41,43 @@ export class BenevoleService {
     );
   }
 
+  fetchBenevole() {
+    return this.http.get<{benevole: BenevoleModel}>(
+      this.api + BenevoleService.getIDbenevole(),
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(errorRes => {
+        return throwError(errorRes);
+      })
+    );
+  }
+
   createBenevole(benevole: BenevoleModel) {
     console.log('benevole', JSON.stringify(benevole));
     // JSON.stringify(benevole);
     return this.http.post<{msg: string, state: string}>(
       this.api + 'ajouter',
       JSON.stringify(benevole), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateBenevole(benevole: BenevoleModel) {
+    return this.http.put<{state: string, msg: string}>(
+      this.api + 'modifier/' + BenevoleService.getIDbenevole(),
+      JSON.stringify(benevole),
+      {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         }),
@@ -132,6 +165,23 @@ export class BenevoleService {
     ).pipe(
       map(responseData => {
         return responseData[0].annonces;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  fetchEvenements() {
+    return this.http.get<{state?: string, msg?: string, evenement?: EvenementModel}>(
+      this.apiEvenement + '/all',
+      {
+        headers: new HttpHeaders({
+          'Content-type': 'application/json'
+        }),
+        responseType: 'json'
+      }
+    ).pipe(
+      map(responseData => {
+        return responseData;
       }),
       catchError(this.handleError)
     );

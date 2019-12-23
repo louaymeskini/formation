@@ -5,21 +5,24 @@ import {associationNav} from '../../_nav-association';
 import {AuthService} from '../../views/services/auth.service';
 import {benevoleNav} from '../../_nav-benevole';
 import {Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent implements OnInit{
+export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
   public adminNav = adminNav;
   public associationNav = associationNav;
   public benevoleNav = benevoleNav;
   name: string;
+  api: string = environment.apiUrl + 'association/img/';
 
   ngOnInit () {
     // this.nameToDisplay();
+    // console.log(JSON.parse(localStorage.getItem('imageAssociation')));
   }
 
   toggleMinimize(e) {
@@ -54,6 +57,14 @@ export class DefaultLayoutComponent implements OnInit{
       this.router.navigate(['/association/profile']);
     } else if (this.authService.getType() === 'benevole' || localStorage.getItem('idBenevole')) {
       this.router.navigate(['/benevole/profile']);
+    }
+  }
+
+  imgToDisplay() {
+    if (localStorage.getItem('imageAssociation')) {
+      return this.api + JSON.parse(localStorage.getItem('imageAssociation'));
+    } else {
+      return 'assets/img/avatars/6.jpg';
     }
   }
 

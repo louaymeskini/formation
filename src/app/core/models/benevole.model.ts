@@ -12,6 +12,7 @@ export class BenevoleModel {
   codePostale: string;
   tel: string;
   annonces?: [];
+  associations?: [];
   benevoles?: [];
   evenements?: [];
   dons?: [];

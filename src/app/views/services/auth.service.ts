@@ -44,6 +44,7 @@ export class AuthService {
                 this.role = 'admin';
               } else if (resData.data.user.type === 'association') {
                 localStorage.setItem('idAssociation', JSON.stringify(resData.data.user._id));
+                localStorage.setItem('imageAssociation', JSON.stringify(resData.data.user.imageAssociation));
                 this.router.navigate(['/association']);
                 this.role = 'association';
               } else if (resData.data.user.type === 'benevole') {

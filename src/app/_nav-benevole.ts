@@ -24,5 +24,29 @@ export const benevoleNav: INavData [] = [
         icon: 'icon-note',
       }
     ]
+  },
+  {
+    name: 'Evenements',
+    url: '/benevole/evenements',
+    icon: 'icon-calendar',
+    children: [
+      {
+        name: 'Liste Evenements',
+        url: '/benevole/evenements',
+        icon: 'icon-calendar',
+      }
+    ]
+  },
+  {
+    name: 'Profile',
+    url: '/benevole/profile',
+    icon: 'icon-settings',
+    children: [
+      {
+        name: 'Modifier profile',
+        url: '/benevole/profile',
+        icon: 'icon-settings',
+      }
+    ]
   }
 ];

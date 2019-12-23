@@ -11,11 +11,15 @@ import {BenevoleService} from '../../service-layer/store/benevole/services/benev
 import {BenevoleRoutingModule} from './benevole-routing.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AnnoncesComponent } from './annonces/annonces.component';
+import { EvenementsComponent } from './evenements/evenements.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     BenevoleComponent,
-    AnnoncesComponent
+    AnnoncesComponent,
+    EvenementsComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

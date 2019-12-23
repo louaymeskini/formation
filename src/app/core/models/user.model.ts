@@ -13,6 +13,7 @@ export class UserModel {
       adresse?: string;
       codePostale?: number;
       tel?: number;
+      imageAssociation?: string;
     }
   };
   status: string;
