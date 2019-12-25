@@ -5,11 +5,16 @@ import {throwError} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {BenevoleModel} from '../../core/models/benevole.model';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {AlertConfig} from 'ngx-bootstrap';
 
+export function getAlertConfig(): AlertConfig {
+  return Object.assign(new AlertConfig(), { type: 'success' });
+}
 @Component({
   selector: 'app-benevole',
   templateUrl: './benevole.component.html',
-  styleUrls: ['./benevole.component.css']
+  styleUrls: ['./benevole.component.css'],
+  providers: [{ provide: AlertConfig, useFactory: getAlertConfig }]
 })
 export class BenevoleComponent implements OnInit, OnDestroy {
   all: AssociationModel[];
@@ -18,6 +23,7 @@ export class BenevoleComponent implements OnInit, OnDestroy {
   non: AssociationModel[];
   api: string = environment.apiUrl + 'association/img/';
   config: any;
+  alertsDeleted: any = [];
 
   constructor(private benevoleService: BenevoleService,
               private spinnerService: NgxSpinnerService ) { }
@@ -67,6 +73,8 @@ export class BenevoleComponent implements OnInit, OnDestroy {
       console.log('ok');
       this.fetchBenevoleAsso();
       this.spinnerService.hide();
+      const msg = 'Votre invitation est envoyée à ' + associationNon.nom.toUpperCase() + ' le: ' + new Date().toLocaleTimeString();
+      this.add(msg, 'success');
     } else {
       console.log('non');
       this.spinnerService.hide();
@@ -79,13 +87,23 @@ export class BenevoleComponent implements OnInit, OnDestroy {
     this.benevoleService.leaveAssociation(association).subscribe(res => {
       if (res.state === 'ok') {
         this.fetchBenevoleAsso();
+        const msg = 'Vous avez quitter l\'association ' + association.nom.toUpperCase() + ' le: ' + new Date().toLocaleTimeString();
+        this.add(msg, 'warning');
       }
       this.spinnerService.hide();
     });
   }
 
+  add(msg: string, type: string): void {
+    this.alertsDeleted.push({
+      type: type,
+      msg: msg,
+      timeout: 6000
+    });
+  }
+
   pageChanged(event) {
-    console.log(event)
+    console.log(event);
     this.config.currentPage = event;
   }
 

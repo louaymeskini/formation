@@ -38,28 +38,31 @@ export class ProfileComponent implements OnInit {
   }
 
   loadBenevole() {
+    this.spinnerService.show();
     this.benevoleService.fetchBenevole().subscribe(res => {
         this.infoBenevole = res;
+        this.spinnerService.hide();
       console.log(this.infoBenevole);
     }, error => {
       throwError(error);
+      this.spinnerService.hide();
     });
   }
 
   validate () {
     this.benevoleForm = this.fb.group({
-      nom: [''],
-      prenom: [''],
+      nom: ['', [Validators.minLength(4), Validators.pattern(/^[A-Za-z]+$/)]],
+      prenom: ['', [Validators.minLength(4), Validators.pattern(/^[A-Za-z]+$/)]],
       sexe: [''],
-      ville: [''],
-      codePostale: ['', [Validators.min(1000),
+      ville: ['', [Validators.minLength(4), Validators.pattern(/^[A-Za-z]+$/)]],
+      codePostale: ['', [Validators.min(1000), Validators.pattern((/^-?(0|[1-9]\d*)?$/)),
         Validators.max(9999)]],
-      adresse: [''],
-      tel: ['', [Validators.min(20000000),
+      adresse: ['', Validators.minLength(4)],
+      tel: ['', [Validators.min(20000000), Validators.pattern((/^-?(0|[1-9]\d*)?$/)),
         Validators.max(99999999)]],
-      username: [''],
+      username: ['', Validators.minLength(4)],
       email: ['', Validators.email],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 

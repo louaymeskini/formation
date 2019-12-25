@@ -5,32 +5,32 @@
       <strong>Benevole</strong>
     </div>
     <form [formGroup]="benevoleForm" (ngSubmit)="onSubmit()">
-      <div class="card-body">
+      <div *ngIf="infoBenevole" class="card-body">
         <div class="row">
           <div class="form-group col-sm-6">
             <label for="nom">Nom Benevole</label>
             <input type="text"
                    class="form-control"
-                   [ngClass]="{error: (nom.dirty || nom.touched) && nom.invalid}"
+                   [ngClass]="{error: (nom.dirty || nom.touched) && nom.invalid && nom.errors}"
                    id="nom"
-                   placeholder="Entrer le Nom de benevole"
+                   [value]="infoBenevole.nom"
                    name="nom"
                    formControlName="nom">
             <small class="help-block red"
-                   *ngIf="(nom.dirty || nom.touched) && nom.invalid">
+                   *ngIf="(nom.dirty || nom.touched) && nom.invalid && nom.errors">
               Vérifier le nom!</small>
           </div>
           <div class="form-group col-sm-6">
             <label for="prenom">Prenom Benevole</label>
             <input type="text"
                    class="form-control"
-                   [ngClass]="{error: (prenom.dirty || prenom.touched) && prenom.invalid}"
+                   [ngClass]="{error: (prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors}"
                    id="prenom"
-                   placeholder="Entrer le prenom de benevole"
+                   [value]="infoBenevole.prenom"
                    name="nom"
                    formControlName="prenom">
             <small class="help-block red"
-                   *ngIf="(prenom.dirty || prenom.touched) && prenom.invalid">
+                   *ngIf="(prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors">
               Vérifier le prenom!</small>
           </div>
         </div>
@@ -53,13 +53,13 @@
           <label for="adresse">Adresse</label>
           <input type="text"
                  class="form-control"
-                 [ngClass]="{error: (adresse.dirty || adresse.touched) && adresse.invalid}"
+                 [ngClass]="{error: (adresse.dirty || adresse.touched) && adresse.invalid && adresse.errors}"
                  id="adresse"
-                 placeholder="Entrer l'Adresse de benevole"
+                 [value]="infoBenevole.adresse"
                  name="adresse"
                  formControlName="adresse">
           <small class="help-block red"
-                 *ngIf="(adresse.dirty || adresse.touched) && adresse.invalid">
+                 *ngIf="(adresse.dirty || adresse.touched) && adresse.invalid && adresse.errors">
             Vérifier l'adresse!</small>
         </div>
         <div class="row">
@@ -67,22 +67,22 @@
             <label for="ville">Ville</label>
             <input type="text"
                    class="form-control"
-                   [ngClass]="{error: (ville.dirty || ville.touched) && ville.invalid}"
+                   [ngClass]="{error: (ville.dirty || ville.touched) && ville.invalid && ville.errors}"
                    id="ville"
-                   placeholder="Entrer la Ville de benevole"
+                   [value]="infoBenevole.ville"
                    name="ville"
                    formControlName="ville">
             <small class="help-block red"
-                   *ngIf="(ville.dirty || ville.touched) && ville.invalid">
+                   *ngIf="(ville.dirty || ville.touched) && ville.invalid && ville.errors">
               Vérifier la ville!</small>
           </div>
           <div class="form-group col-sm-4">
             <label for="postal-code">Postal Code</label>
-            <input type="number"
+            <input type="text"
                    class="form-control"
                    [ngClass]="{error: (codePostale.dirty || codePostale.touched) && codePostale.invalid && codePostale.errors}"
                    id="postal-code"
-                   placeholder="Postal Code"
+                   [value]="infoBenevole.codePostale"
                    name="codePostale"
                    formControlName="codePostale"
                    maxlength="4"
@@ -94,15 +94,13 @@
         </div><!--/.row-->
         <div class="form-group">
           <label for="tel">Téléphone</label>
-          <input type="number"
+          <input type="text"
                  class="form-control"
                  [ngClass]="{error: (tel.dirty || tel.touched) && tel.invalid && tel.errors}"
                  id="tel"
-                 placeholder="Entrer le Téléphone de benevole"
+                 [value]="infoBenevole.tel"
                  name="tel"
-                 formControlName="tel"
-                 maxlength="9"
-                 minlength="9">
+                 formControlName="tel">
           <small class="help-block red"
                  *ngIf="(tel.dirty || tel.touched) && tel.invalid && tel.errors">
             Vérifier le Téléphone!</small>
@@ -113,7 +111,7 @@
                  class="form-control"
                  [ngClass]="{error: (email.dirty || email.touched) && email.invalid && email.errors}"
                  id="email"
-                 placeholder="Entrer l'Email de benevole"
+                 [value]="infoBenevole.email"
                  name="email"
                  formControlName="email"
                  email>
@@ -127,7 +125,7 @@
                  class="form-control"
                  [ngClass]="{error: (username.dirty || username.touched) && username.invalid && username.errors}"
                  id="username"
-                 placeholder="Entrer Username de benevole"
+                 [value]="infoBenevole.username"
                  name="username"
                  formControlName="username">
           <small class="help-block red"
@@ -135,12 +133,12 @@
             Vérifier le username!</small>
         </div>
         <div class="form-group">
-          <label for="password">Mot De Passe benevole</label>
+          <label for="password">Mot De Passe benevole *</label>
           <input type="password"
                  class="form-control"
                  [ngClass]="{error: (password.dirty || password.touched) && password.invalid && password.errors}"
                  id="password"
-                 placeholder="Entrer password de benevole"
+                 placeholder="Entrer mot de passe de benevole"
                  name="password"
                  formControlName="password"
                  required>

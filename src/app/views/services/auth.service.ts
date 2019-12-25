@@ -37,6 +37,7 @@ export class AuthService {
             console.log('service ', resData);
             if (resData.status !== 'error') {
               localStorage.setItem('token', JSON.stringify(resData.data.token));
+              localStorage.setItem('username', JSON.stringify(resData.data.user.username));
               this.logged = true;
               if (resData.data.user.type === 'admin') {
                 localStorage.setItem('idAdmin', JSON.stringify(resData.data.user._id));

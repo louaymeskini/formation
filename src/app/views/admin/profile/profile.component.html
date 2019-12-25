@@ -5,17 +5,17 @@
       <strong>Administrateur</strong>
     </div>
     <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
-      <div class="card-body">
+      <div *ngIf="adminInfo" class="card-body">
         <div class="form-group">
           <label for="nom">Nom</label>
           <input type="text"
                  class="form-control"
                  id="nom"
-                 placeholder="Entrer le nom de l'administrateur"
+                 [value]="adminInfo.nom"
                  formControlName="nom"
-                 [ngClass]="{error: adminForm.get('nom').hasError('minlength')}">
+                 [ngClass]="{error: adminForm.get('nom').errors}">
           <small class="help-block red"
-                 *ngIf="adminForm.get('nom').hasError('minlength')">
+                 *ngIf="adminForm.get('nom').errors">
             Vous devez vérifier votre nom!</small>
         </div>
         <div class="form-group">
@@ -23,18 +23,18 @@
           <input type="text"
                  class="form-control"
                  id="Prenom"
-                 placeholder="Entrer le prenom de l'administrateur"
+                 [value]="adminInfo.prenom"
                  formControlName="prenom"
-                 [ngClass]="{error: adminForm.get('prenom').hasError('minlength')}">
+                 [ngClass]="{error: adminForm.get('prenom').errors}">
           <small class="help-block red"
-                 *ngIf="adminForm.get('prenom').hasError('minlength')">
+                 *ngIf="adminForm.get('prenom').errors">
             Vous devez vérifier votre prenom!</small>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email"
                  class="form-control" id="email"
-                 placeholder="Entrer l'email de l'administrateur"
+                 [value]="adminInfo.email"
                  formControlName="email"
                  [ngClass]="{error: adminForm.get('email').hasError('email')}">
           <small class="help-block red"
@@ -46,7 +46,7 @@
           <input type="text"
                  class="form-control"
                  id="username"
-                 placeholder="Entrer le username de l'administrateur"
+                 [value]="adminInfo.username"
                  formControlName="username"
                  [ngClass]="{error: adminForm.get('username').hasError('minlength')}">
           <small class="help-block red"

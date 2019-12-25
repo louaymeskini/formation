@@ -58,7 +58,7 @@
           </tbody>
         </table>
 
-        <nav>
+        <nav *ngIf="all && all.length>5">
           <pagination-template #p="paginationApi"
                                id="pagination1"
                                (pageChange)="pageChanged($event)">
@@ -90,6 +90,10 @@
         </nav>
 
       </div>
+    </div>
+    <div *ngFor="let alert of alertsDeleted">
+      <alert [type]="alert.type"
+             [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
     </div>
   </div>
   <!--/.col-->

@@ -34,18 +34,20 @@ export class RegisterComponent implements OnInit {
 
   validate () {
     this.benevoleForm = this.fb.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
+      nom: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+      prenom: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
       sexe: ['', Validators.required],
-      ville: ['', Validators.required],
-      codePostale: ['', [Validators.required, Validators.min(1000),
+      ville: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+      codePostale: ['', [Validators.required, Validators.pattern((/^-?(0|[1-9]\d*)?$/)),
+        Validators.min(1000),
         Validators.max(9999)]],
       adresse: ['', Validators.required],
-      tel: ['', [Validators.required, Validators.min(20000000),
+      tel: ['', [Validators.required, Validators.pattern((/^-?(0|[1-9]\d*)?$/)),
+        Validators.min(20000000),
       Validators.max(99999999)]],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 

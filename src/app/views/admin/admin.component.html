@@ -55,7 +55,7 @@
           </tbody>
         </table>
 
-        <nav>
+        <nav *ngIf="listeAssociation && listeAssociation.length > 5">
         <pagination-template #p="paginationApi"
                              (pageChange)="pageChanged($event)">
           <ul class="pagination">

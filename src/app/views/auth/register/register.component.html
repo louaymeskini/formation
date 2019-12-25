@@ -16,14 +16,14 @@
                         <span class="input-group-text"><i class="icon-user"></i></span>
                       </div>
                       <input class="form-control"
-                             [ngClass]="{error: ((nom.dirty || nom.touched) && nom.invalid && nom.errors.required)}"
+                             [ngClass]="{error: ((nom.dirty || nom.touched) && nom.invalid && nom.errors)}"
                              size="16" type="text"
                              placeholder="Votre Nom"
                              formControlName="nom"
                              required>
                     </div>
                     <small class="help-block red"
-                           *ngIf="(nom.dirty || nom.touched) && nom.invalid && nom.errors.required">
+                           *ngIf="(nom.dirty || nom.touched) && nom.invalid && nom.errors">
                       Vérifier votre nom!</small>
                   </div>
                   <div class="form-group col-sm-6">
@@ -33,7 +33,7 @@
                           <span class="input-group-text"><i class="icon-user"></i></span>
                         </div>
                         <input class="form-control"
-                               [ngClass]="{error: ((prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors.required)}"
+                               [ngClass]="{error: ((prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors)}"
                                size="16"
                                type="text"
                                placeholder="Votre Prenom"
@@ -41,7 +41,7 @@
                                required>
                       </div>
                       <small class="help-block red"
-                             *ngIf="(prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors.required">
+                             *ngIf="(prenom.dirty || prenom.touched) && prenom.invalid && prenom.errors">
                         Vérifier votre prenom!</small>
                     </div>
                   </div>
@@ -68,7 +68,7 @@
                         <span class="input-group-text"><i class="icon-map"></i></span>
                       </div>
                       <input class="form-control"
-                             [ngClass]="{error: ((ville.dirty || ville.touched) && ville.invalid && ville.errors.required)}"
+                             [ngClass]="{error: ((ville.dirty || ville.touched) && ville.invalid && ville.errors)}"
                              size="16"
                              type="text"
                              placeholder="Votre Ville"
@@ -76,7 +76,7 @@
                              required>
                     </div>
                     <small class="help-block red"
-                           *ngIf="(ville.dirty || ville.touched) && ville.invalid && ville.errors.required">
+                           *ngIf="(ville.dirty || ville.touched) && ville.invalid && ville.errors">
                       Vérifier votre ville!</small>
                   </div>
                   <div class="form-group col-sm-6">
@@ -87,7 +87,7 @@
                       <input class="form-control"
                              [ngClass]="{error: ((codePostale.dirty || codePostale.touched) && codePostale.invalid && codePostale.errors)}"
                              size="16"
-                             type="number"
+                             type="text"
                              placeholder="Code Postale"
                              formControlName="codePostale"
                              required>
@@ -123,7 +123,7 @@
                         </div>
                         <input class="form-control"
                                [ngClass]="{error: ((tel.dirty || tel.touched) && tel.invalid && tel.errors)}"
-                               size="16" type="number"
+                               size="16" type="text"
                                placeholder="Votre téléphone"
                                formControlName="tel"
                                required>

@@ -19,6 +19,7 @@ export class EvenementsComponent implements OnInit {
   evenements: EvenementModel[] = [];
   config: any;
   alertsEmpty: any = [];
+  alertsDeleted: any = [];
 
   constructor(private associationService: AssociationService,
               private spinnerService: NgxSpinnerService) { }
@@ -59,6 +60,7 @@ export class EvenementsComponent implements OnInit {
         this.evenements = [];
         this.loadEvenement();
         this.spinnerService.hide();
+        this.add(evenement.titre);
       }
     }, error => {
       throwError(error);
@@ -74,6 +76,15 @@ export class EvenementsComponent implements OnInit {
       type: type,
       msg: msg,
       timeout: null
+    });
+  }
+
+  add(nom: string): void {
+    this.alertsDeleted.push({
+      type: 'success',
+      nom : nom.toUpperCase(),
+      msg: 'L\'Evenement ' + nom.toUpperCase() + ' est supprimée le: ' + new Date().toLocaleTimeString(),
+      timeout: 6000
     });
   }
 

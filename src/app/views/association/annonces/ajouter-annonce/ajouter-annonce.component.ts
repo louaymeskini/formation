@@ -29,8 +29,9 @@ export class AjouterAnnonceComponent implements OnInit {
 
   validate() {
     this.annonceForm = this.fb.group({
-      titre: ['', Validators.required],
-      sujet: ['', Validators.required],
+      titre: ['', [Validators.required, Validators.minLength(4),
+        Validators.pattern(/^[A-Za-z]+$/)]],
+      sujet: ['', [Validators.required, Validators.minLength(4)]],
       pieceJointe: ['', Validators.required]
     });
 
@@ -54,14 +55,14 @@ export class AjouterAnnonceComponent implements OnInit {
     this.spinnerService.show();
     form.pieceJointe = this.fileToUpload;
     this.associationService.createAnnonce(form).subscribe(res => {
-        console.log('res', res);
-        // @ts-ignore
+      console.log('res', res);
+      // @ts-ignore
       if (res !== res.state) {
-          console.log('type', typeof res);
-          this.router.navigate(['/association/annonces']);
+        console.log('type', typeof res);
+        this.router.navigate(['/association/annonces']);
         this.spinnerService.hide();
-        }
-      }, error => {
+      }
+    }, error => {
       throwError(error);
       this.spinnerService.hide();
     });

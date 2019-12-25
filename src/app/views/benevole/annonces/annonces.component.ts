@@ -42,7 +42,7 @@ export class AnnoncesComponent implements OnInit {
       if (this.annonces.length === 0) {
         const type = 'info';
         const msg = 'Vous n\'avez pas des annonces puisque vous' +
-          ' n\'etes pas membre dans acune association :)';
+          ' n\'etes pas membre dans aucune association :)';
         this.notificationEmty(type, msg);
       }
       this.spinnerService.hide();

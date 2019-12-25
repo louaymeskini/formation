@@ -5,3 +5,8 @@
 .error {
   border: 1px solid red;
 }
+
+.ng-valid:not(form) {
+  /*background-color: lightgreen;*/
+  border: 1px solid lightgreen
+}

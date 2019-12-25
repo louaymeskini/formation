@@ -19,6 +19,7 @@ export class AnnoncesComponent implements OnInit {
   annonces: AnnonceModel[] = [];
   config: any;
   alertsEmpty: any = [];
+  alertsDeleted: any = [];
 
   constructor(private associationService: AssociationService,
               private spinnerService: NgxSpinnerService) { }
@@ -59,6 +60,7 @@ export class AnnoncesComponent implements OnInit {
         this.annonces = [];
         this.loadAnnonces();
         this.spinnerService.hide();
+        this.add(annonce.titre);
       }
     }, error => {
       throwError(error);
@@ -74,6 +76,15 @@ export class AnnoncesComponent implements OnInit {
       type: type,
       msg: msg,
       timeout: null
+    });
+  }
+
+  add(nom: string): void {
+    this.alertsDeleted.push({
+      type: 'success',
+      nom : nom.toUpperCase(),
+      msg: 'L\'annonce ' + nom.toUpperCase() + ' est supprimée le: ' + new Date().toLocaleTimeString(),
+      timeout: 6000
     });
   }
 

@@ -29,7 +29,7 @@
                    [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
           </div>
         </div>
-        <nav *ngIf="annonces.length > 0">
+        <nav *ngIf="annonces.length > 5">
           <pagination-template #p="paginationApi"
                                (pageChange)="pageChanged($event)">
             <ul class="pagination">

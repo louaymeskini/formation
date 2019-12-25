@@ -38,14 +38,15 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   navToDisplay() {
+    this.name = JSON.parse(localStorage.getItem('username'));
     if (this.authService.getType() === 'admin' || localStorage.getItem('idAdmin')) {
-      this.name = 'administrateur'
+      // this.name = 'administrateur';
       return this.adminNav;
     } else if (this.authService.getType() === 'association' || localStorage.getItem('idAssociation')) {
-      this.name = 'association'
+      // this.name = 'association';
       return this.associationNav;
     } else if (this.authService.getType() === 'benevole' || localStorage.getItem('idBenevole')) {
-      this.name = 'benevole'
+      // this.name = 'benevole';
       return  this.benevoleNav;
     }
   }

@@ -25,7 +25,27 @@
             <td>{{evenement.date | date}}</td>
             <td><i class="fa fa-remove"
                    style="cursor: pointer;"
-            (click)="supprimerEvenement(evenement)"></i></td>
+            (click)="dangerModal.show()"></i></td>
+
+            <div bsModal #dangerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-danger" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Supprimer Evenement</h4>
+                    <button type="button" class="close" (click)="dangerModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Voulez-vous vraiment supprimer l'événement <strong>{{evenement.titre | uppercase}}</strong></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="dangerModal.hide()">Annuler</button>
+                    <button type="button" class="btn btn-danger" (click)="supprimerEvenement(evenement)">Supprimer</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
 
           </tr>
           </tbody>
@@ -36,7 +56,7 @@
                    [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
           </div>
         </div>
-        <nav *ngIf="evenements.length > 0">
+        <nav *ngIf="evenements.length > 5">
           <pagination-template #p="paginationApi"
                                (pageChange)="pageChanged($event)">
             <ul class="pagination">
@@ -67,6 +87,10 @@
         </nav>
 
       </div>
+    </div>
+    <div *ngFor="let alert of alertsDeleted">
+      <alert [type]="alert.type"
+             [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
     </div>
   </div>
   <!--/.col-->

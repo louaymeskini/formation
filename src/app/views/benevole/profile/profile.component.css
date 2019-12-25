@@ -6,7 +6,7 @@
   color: red;
 }
 
-.ng-valid.required {
+.ng-dirty.ng-touched.ng-valid:not(form) {
   /*background-color: lightgreen;*/
   border: 1px solid lightgreen
 }

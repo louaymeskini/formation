@@ -55,9 +55,11 @@ export class ProfileComponent implements OnInit {
   validate() {
     this.adminForm = new FormGroup({
       nom: new FormControl(null,
-        [Validators.minLength(4)]),
+        [Validators.minLength(4),
+          Validators.pattern(/^[A-Za-z]+$/)]),
       prenom: new FormControl(null,
-        [Validators.minLength(4)]),
+        [Validators.minLength(4),
+          Validators.pattern(/^[A-Za-z]+$/)]),
       email: new FormControl(null,
         [Validators.email]),
       username: new FormControl(null,
