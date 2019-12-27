@@ -6,6 +6,7 @@ import {environment} from '../../../environments/environment';
 import {BenevoleModel} from '../../core/models/benevole.model';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {AlertConfig} from 'ngx-bootstrap';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 export function getAlertConfig(): AlertConfig {
   return Object.assign(new AlertConfig(), { type: 'success' });
@@ -24,6 +25,7 @@ export class BenevoleComponent implements OnInit, OnDestroy {
   api: string = environment.apiUrl + 'association/img/';
   config: any;
   alertsDeleted: any = [];
+  loaded: boolean = false;
 
   constructor(private benevoleService: BenevoleService,
               private spinnerService: NgxSpinnerService ) { }
@@ -59,6 +61,7 @@ export class BenevoleComponent implements OnInit, OnDestroy {
         };
       console.log('all', this.all);
       this.spinnerService.hide();
+      this.loaded = true;
     },
       error => {
       throwError(error);

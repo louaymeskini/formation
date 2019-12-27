@@ -13,6 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AnnoncesComponent } from './annonces/annonces.component';
 import { EvenementsComponent } from './evenements/evenements.component';
 import { ProfileComponent } from './profile/profile.component';
+import {MatProgressBarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProfileComponent } from './profile/profile.component';
     ReactiveFormsModule,
     NgxSpinnerModule,
     BenevoleRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatProgressBarModule
   ],
   providers: [BenevoleService,
     AssociationService,
