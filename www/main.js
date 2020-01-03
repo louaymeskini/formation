@@ -1195,6 +1195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_services_auth_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./views/services/auth.service */ "./src/app/views/services/auth.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _views_admin_admin_module__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./views/admin/admin.module */ "./src/app/views/admin/admin.module.ts");
+/* harmony import */ var _views_services_session_interceptor_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./views/services/session-interceptor.service */ "./src/app/views/services/session-interceptor.service.ts");
 
 
 
@@ -1218,6 +1219,7 @@ var APP_CONTAINERS = [
 // Import routing module
 
 // Import 3rd party components
+
 
 
 
@@ -1256,7 +1258,12 @@ var AppModule = /** @class */ (function () {
             providers: [_views_services_auth_service__WEBPACK_IMPORTED_MODULE_17__["AuthService"],
                 {
                     provide: _angular_common__WEBPACK_IMPORTED_MODULE_3__["LocationStrategy"],
-                    useClass: _angular_common__WEBPACK_IMPORTED_MODULE_3__["HashLocationStrategy"]
+                    useClass: _angular_common__WEBPACK_IMPORTED_MODULE_3__["HashLocationStrategy"],
+                },
+                {
+                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_18__["HTTP_INTERCEPTORS"],
+                    useClass: _views_services_session_interceptor_service__WEBPACK_IMPORTED_MODULE_20__["SessionInterceptorService"],
+                    multi: true
                 }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
@@ -3111,6 +3118,58 @@ var AuthService = /** @class */ (function () {
         Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/views/services/session-interceptor.service.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/views/services/session-interceptor.service.ts ***!
+  \***************************************************************/
+/*! exports provided: SessionInterceptorService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SessionInterceptorService", function() { return SessionInterceptorService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+
+var SessionInterceptorService = /** @class */ (function () {
+    function SessionInterceptorService(router) {
+        this.router = router;
+    }
+    SessionInterceptorService.prototype.intercept = function (req, next) {
+        var _this = this;
+        // @ts-ignore
+        return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err, caught) {
+            console.log(err);
+            console.log(err.error);
+            if (err.status === 401) {
+                localStorage.clear();
+                _this.router.navigate(['/login']);
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(err);
+            }
+            throw err;
+        }));
+    };
+    SessionInterceptorService.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    ]; };
+    SessionInterceptorService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+    ], SessionInterceptorService);
+    return SessionInterceptorService;
 }());
 
 

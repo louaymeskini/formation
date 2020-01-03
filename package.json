@@ -25,7 +25,8 @@
     "build": "ng build --prod --aot --buildOptimizer --commonChunk --vendorChunk --optimization --progress",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "buildMob": "ng build && cordova build android && cordova run android"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +49,7 @@
     "chart.js": "^2.9.2",
     "cordova-android": "^8.1.0",
     "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-local-notifications": "^1.0.0",
     "core-js": "^2.6.10",
     "flag-icon-css": "^3.4.5",
     "font-awesome": "^4.7.0",

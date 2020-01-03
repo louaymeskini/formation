@@ -121,6 +121,7 @@ var AuthComponent = /** @class */ (function () {
         this.alertsError = [];
     }
     AuthComponent.prototype.ngOnInit = function () {
+        this.spinnerService.hide();
         this.authService.autoLogin();
         // localStorage.clear();
         // console.log('logged ', this.authService.logged);

@@ -23,6 +23,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinnerService.hide();
      this.authService.autoLogin();
     // localStorage.clear();
     // console.log('logged ', this.authService.logged);

@@ -47,6 +47,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AssociationService} from './service-layer/store/association/services/association.service';
 import {TokenInterceptorService} from './views/services/token-interceptor.service';
 import {AdminModule} from './views/admin/admin.module';
+import {SessionInterceptorService} from './views/services/session-interceptor.service';
 @NgModule({
   imports: [
     BrowserModule,
@@ -75,8 +76,13 @@ import {AdminModule} from './views/admin/admin.module';
   providers: [AuthService,
     {
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+    useClass: HashLocationStrategy,
+  },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SessionInterceptorService,
+      multi: true
+    }],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
