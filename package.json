@@ -3,6 +3,10 @@
   "version": "2.7.0",
   "description": "CoreUI Free Angular 2+ Admin Template",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.3",
+    "npm": "6.14.6"
+  },
   "author": {
     "name": "Łukasz Holeczek",
     "url": "http://holeczek.pl",
