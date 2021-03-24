@@ -30,7 +30,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "buildMob": "ng build && cordova build android && cordova run android"
+    "buildMob": "ng build && cordova build android && cordova run android",
+    "heroku-prebuild": "npm install --save --legacy-peer-deps"
   },
   "private": true,
   "dependencies": {
