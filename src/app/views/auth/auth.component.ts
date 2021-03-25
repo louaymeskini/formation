@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 import {throwError} from 'rxjs';
 
 

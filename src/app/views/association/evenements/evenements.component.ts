@@ -3,7 +3,7 @@ import {EvenementModel} from '../../../core/models/evenement.model';
 import {AssociationService} from '../../../service-layer/store/association/services/association.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {throwError} from 'rxjs';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 
 export function getAlertConfig(): AlertConfig {
   return Object.assign(new AlertConfig(), { type: 'success' });

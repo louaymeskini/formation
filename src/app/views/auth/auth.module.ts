@@ -4,7 +4,7 @@ import {AuthComponent} from './auth.component';
 import {AuthRoutingModule} from './auth-routing.module';
 import {getAlertConfig, RegisterComponent} from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AlertConfig, AlertModule} from 'ngx-bootstrap';
+import {AlertConfig, AlertModule} from 'ngx-bootstrap/alert';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {AuthService} from '../services/auth.service';
 

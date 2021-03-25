@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {BenevoleService} from '../../../service-layer/store/benevole/services/benevole.service';
 import {BenevoleModel} from '../../../core/models/benevole.model';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {AlertConfig, ModalDirective} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 

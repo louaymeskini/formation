@@ -3,7 +3,7 @@ import {BenevoleService} from '../../../service-layer/store/benevole/services/be
 import {throwError} from 'rxjs';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {EvenementModel} from '../../../core/models/evenement.model';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 
 export function getAlertConfig(): AlertConfig {
   return Object.assign(new AlertConfig(), { type: 'success' });

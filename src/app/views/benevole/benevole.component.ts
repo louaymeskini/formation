@@ -5,7 +5,7 @@ import {throwError} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {BenevoleModel} from '../../core/models/benevole.model';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 export function getAlertConfig(): AlertConfig {

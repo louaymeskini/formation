@@ -3,7 +3,7 @@ import {AssociationService} from '../../../service-layer/store/association/servi
 import {NgxSpinnerService} from 'ngx-spinner';
 import {throwError} from 'rxjs';
 import {AnnonceModel} from '../../../core/models/annonce.model';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 
 export function getAlertConfig(): AlertConfig {
   return Object.assign(new AlertConfig(), { type: 'success' });

@@ -4,7 +4,7 @@ import {BenevoleModel} from '../../../core/models/benevole.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {throwError} from 'rxjs';
 import {Router} from '@angular/router';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 import {NgxSpinnerService} from 'ngx-spinner';
 
 export function getAlertConfig(): AlertConfig {

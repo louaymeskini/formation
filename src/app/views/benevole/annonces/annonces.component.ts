@@ -3,7 +3,7 @@ import {BenevoleService} from '../../../service-layer/store/benevole/services/be
 import {NgxSpinnerService} from 'ngx-spinner';
 import {AnnonceModel} from '../../../core/models/annonce.model';
 import {throwError} from 'rxjs';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 import {environment} from '../../../../environments/environment';
 
 export function getAlertConfig(): AlertConfig {

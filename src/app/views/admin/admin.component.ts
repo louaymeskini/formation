@@ -4,7 +4,7 @@ import {AssociationService} from '../../service-layer/store/association/services
 import {AssociationModel} from '../../core/models/association.model';
 import {environment} from '../../../environments/environment';
 import {ModalDirective} from 'ngx-bootstrap/modal';
-import {AlertConfig} from 'ngx-bootstrap';
+import {AlertConfig} from 'ngx-bootstrap/alert';
 import {NgxSpinnerService} from 'ngx-spinner';
 
 export function getAlertConfig(): AlertConfig {

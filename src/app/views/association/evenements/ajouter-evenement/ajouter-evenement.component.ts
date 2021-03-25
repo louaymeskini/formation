@@ -6,7 +6,6 @@ import {throwError} from 'rxjs';
 import {AssociationService} from '../../../../service-layer/store/association/services/association.service';
 import {Router} from '@angular/router';
 import {formatDate} from '@angular/common';
-import {parseDate} from 'ngx-bootstrap';
 import {DateValidator} from '../../../../core/dateValidator';
 import * as moment from 'moment';
 

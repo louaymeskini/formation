@@ -8,7 +8,8 @@ import {TokenInterceptorService} from '../services/token-interceptor.service';
 import { BenevolesComponent } from './benevoles/benevoles.component';
 import { AjouterAssociationComponent } from './ajouter-association/ajouter-association.component';
 import {AssociationService} from '../../service-layer/store/association/services/association.service';
-import {AlertModule, ModalModule} from 'ngx-bootstrap';
+import {AlertModule} from 'ngx-bootstrap/alert';
+import {ModalModule} from 'ngx-bootstrap/modal';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ProfileComponent } from './profile/profile.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
@@ -27,8 +28,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    ModalModule,
-    AlertModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot(),
     ReactiveFormsModule,
     NgxSpinnerModule,
     NgxPaginationModule
