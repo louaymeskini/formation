@@ -10,9 +10,10 @@ import { AjouterAssociationComponent } from './ajouter-association/ajouter-assoc
 import {AssociationService} from '../../service-layer/store/association/services/association.service';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import { JwPaginationComponent } from 'jw-angular-pagination';
+// import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ProfileComponent } from './profile/profile.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -20,7 +21,6 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     AdminComponent,
     BenevolesComponent,
     AjouterAssociationComponent,
-    JwPaginationComponent,
     ProfileComponent
   ],
   imports: [
@@ -30,7 +30,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPaginationModule
   ],
   providers: [AssociationService,
     {

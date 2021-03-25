@@ -10,6 +10,7 @@ import {TokenInterceptorService} from '../services/token-interceptor.service';
 import {BenevoleComponent} from './benevole.component';
 import {BenevoleService} from '../../service-layer/store/benevole/services/benevole.service';
 import {BenevoleRoutingModule} from './benevole-routing.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AnnoncesComponent } from './annonces/annonces.component';
 import { EvenementsComponent } from './evenements/evenements.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -29,6 +30,7 @@ import {MatProgressBarModule} from '@angular/material';
     ReactiveFormsModule,
     NgxSpinnerModule,
     BenevoleRoutingModule,
+    NgxPaginationModule,
     MatProgressBarModule
   ],
   providers: [BenevoleService,

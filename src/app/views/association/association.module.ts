@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AssociationComponent} from './association.component';
 import {AssociationRoutingModule} from './association-routing.module';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {NgxPaginationModule} from 'ngx-pagination';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { AnnoncesComponent } from './annonces/annonces.component';
@@ -26,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
     AssociationRoutingModule,
     FormsModule,
     NgxSpinnerModule,
+    NgxPaginationModule,
     AlertModule,
     ReactiveFormsModule,
     ModalModule
