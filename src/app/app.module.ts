@@ -48,6 +48,7 @@ import {AssociationService} from './service-layer/store/association/services/ass
 import {TokenInterceptorService} from './views/services/token-interceptor.service';
 import {AdminModule} from './views/admin/admin.module';
 import {SessionInterceptorService} from './views/services/session-interceptor.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   imports: [
     BrowserModule,
@@ -63,7 +64,8 @@ import {SessionInterceptorService} from './views/services/session-interceptor.se
     TabsModule.forRoot(),
     ChartsModule,
     HttpClientModule,
-    AdminModule
+    AdminModule,
+    NgxPaginationModule
   ],
   declarations: [
     AppComponent,
