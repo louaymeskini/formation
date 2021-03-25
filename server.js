@@ -1,16 +1,22 @@
-//Install express server
 const express = require('express');
-const path = require('path');
-
 const app = express();
+const path = require('path');
+const port = process.env.PORT || 8000;
+const server = require('http').Server(app);
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/pfa'));
+app.use(express.static(__dirname, 'dist', {index: false}));
 
-app.get('/*', function(req,res) {
 
-  res.sendFile(path.join(__dirname+'/dist/pfa/index.html'));
+server.listen(port, function() {
+  console.log("App running on port " + port);
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// PathLocationStrategy
+
+app.get('', function(req, res) {
+  res.sendFile(path.join(__dirname, 'src', 'index.html'));
+});
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'src', 'index.html'));
+});
