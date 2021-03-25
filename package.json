@@ -28,7 +28,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build": "ng build --aot --prod",
+    "build": "ng build",
     "buildMob": "ng build && cordova build android && cordova run android",
     "heroku-postbuild": "ng build --aot --prod"
   },
