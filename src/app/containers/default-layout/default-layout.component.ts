@@ -65,7 +65,7 @@ export class DefaultLayoutComponent implements OnInit {
     if (localStorage.getItem('imageAssociation')) {
       return this.api + JSON.parse(localStorage.getItem('imageAssociation'));
     } else {
-      return 'assets/img/avatars/6.jpg';
+      return 'assets/img/brand/logo.png';
     }
   }
 
