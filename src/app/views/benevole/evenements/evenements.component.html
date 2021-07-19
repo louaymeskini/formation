@@ -23,7 +23,7 @@
             <td>{{evenement.ville}}</td>
             <td>{{evenement.adresse}}</td>
             <td>{{evenement.date | date}}</td>
-            <td><i>{{evenement.association.nom | titlecase}}</i></td>
+            <td><i>{{evenement.association?.nom | titlecase}}</i></td>
           </tr>
           </tbody>
         </table>
