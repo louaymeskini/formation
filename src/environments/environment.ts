@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://api-pfa.herokuapp.com/'
-  apiUrl: 'http://localhost:8001/'
+  apiUrl: 'https://api-pfa.herokuapp.com/'
+  // apiUrl: 'http://localhost:8001/'
 };
